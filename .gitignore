@@ -1,0 +1,7 @@
+cache
+local
+node_modules
+out
+.env
+test.db
+trash
