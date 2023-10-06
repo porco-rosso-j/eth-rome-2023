@@ -1,0 +1,1793 @@
+{
+    "abi": [
+        {
+            "inputs": [],
+            "name": "getAllDeposits",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "pubKey20",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "tokenAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint8",
+                            "name": "contractType",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "tokenId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "senderAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "timestamp",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct IPeanut.Deposit[]",
+                    "name": "",
+                    "type": "tuple[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_address",
+                    "type": "address"
+                }
+            ],
+            "name": "getAllDepositsForAddress",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "pubKey20",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "tokenAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint8",
+                            "name": "contractType",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "tokenId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "senderAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "timestamp",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct IPeanut.Deposit[]",
+                    "name": "",
+                    "type": "tuple[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_index",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getDeposit",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "pubKey20",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "tokenAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint8",
+                            "name": "contractType",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "tokenId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "senderAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "timestamp",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct IPeanut.Deposit",
+                    "name": "",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getDepositCount",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "messageHash",
+                    "type": "bytes32"
+                },
+                {
+                    "internalType": "bytes",
+                    "name": "signature",
+                    "type": "bytes"
+                }
+            ],
+            "name": "getSigner",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_tokenAddress",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "_contractType",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_amount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_tokenId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_pubKey20",
+                    "type": "address"
+                }
+            ],
+            "name": "makeDeposit",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_index",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_recipientAddress",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bytes32",
+                    "name": "_recipientAddressHash",
+                    "type": "bytes32"
+                },
+                {
+                    "internalType": "bytes",
+                    "name": "_signature",
+                    "type": "bytes"
+                }
+            ],
+            "name": "withdrawDeposit",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_index",
+                    "type": "uint256"
+                }
+            ],
+            "name": "withdrawDepositSender",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ],
+    "bytecode": {
+        "object": "0x",
+        "sourceMap": "",
+        "linkReferences": {}
+    },
+    "deployedBytecode": {
+        "object": "0x",
+        "sourceMap": "",
+        "linkReferences": {}
+    },
+    "methodIdentifiers": {
+        "getAllDeposits()": "d3f3f5ea",
+        "getAllDepositsForAddress(address)": "c38318c7",
+        "getDeposit(uint256)": "9f9fb968",
+        "getDepositCount()": "9363a141",
+        "getSigner(bytes32,bytes)": "f7b2ec0d",
+        "makeDeposit(address,uint8,uint256,uint256,address)": "f3478011",
+        "withdrawDeposit(uint256,address,bytes32,bytes)": "30c7a3bb",
+        "withdrawDepositSender(uint256)": "86720546"
+    },
+    "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"getAllDeposits\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"pubKey20\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint8\",\"name\":\"contractType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"senderAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"internalType\":\"struct IPeanut.Deposit[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"getAllDepositsForAddress\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"pubKey20\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint8\",\"name\":\"contractType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"senderAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"internalType\":\"struct IPeanut.Deposit[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_index\",\"type\":\"uint256\"}],\"name\":\"getDeposit\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"pubKey20\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint8\",\"name\":\"contractType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"senderAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"internalType\":\"struct IPeanut.Deposit\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDepositCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"messageHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"name\":\"getSigner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint8\",\"name\":\"_contractType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_pubKey20\",\"type\":\"address\"}],\"name\":\"makeDeposit\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_index\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_recipientAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_recipientAddressHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"_signature\",\"type\":\"bytes\"}],\"name\":\"withdrawDeposit\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_index\",\"type\":\"uint256\"}],\"name\":\"withdrawDepositSender\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IPeanut.sol\":\"IPeanut\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":hardhat/=node_modules/hardhat/\"]},\"sources\":{\"contracts/interfaces/IPeanut.sol\":{\"keccak256\":\"0x12e2aaa077a3f883ecef223c1b51b508d0da68a82ab224117fe001d2941fbd87\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://0e1593b40444411cdab790b7e17c3a092d1106748c4d53b731a5e001e5cd5239\",\"dweb:/ipfs/QmcTbPUKCiDNGh4bXwF7xApqjVY8aq7xh2155BHLZ77Xnh\"]}},\"version\":1}",
+    "metadata": {
+        "compiler": {
+            "version": "0.8.20+commit.a1b79de6"
+        },
+        "language": "Solidity",
+        "output": {
+            "abi": [
+                {
+                    "inputs": [],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "getAllDeposits",
+                    "outputs": [
+                        {
+                            "internalType": "struct IPeanut.Deposit[]",
+                            "name": "",
+                            "type": "tuple[]",
+                            "components": [
+                                {
+                                    "internalType": "address",
+                                    "name": "pubKey20",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "amount",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "tokenAddress",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint8",
+                                    "name": "contractType",
+                                    "type": "uint8"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "tokenId",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "senderAddress",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "timestamp",
+                                    "type": "uint256"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "_address",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "getAllDepositsForAddress",
+                    "outputs": [
+                        {
+                            "internalType": "struct IPeanut.Deposit[]",
+                            "name": "",
+                            "type": "tuple[]",
+                            "components": [
+                                {
+                                    "internalType": "address",
+                                    "name": "pubKey20",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "amount",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "tokenAddress",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint8",
+                                    "name": "contractType",
+                                    "type": "uint8"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "tokenId",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "senderAddress",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "timestamp",
+                                    "type": "uint256"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_index",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "getDeposit",
+                    "outputs": [
+                        {
+                            "internalType": "struct IPeanut.Deposit",
+                            "name": "",
+                            "type": "tuple",
+                            "components": [
+                                {
+                                    "internalType": "address",
+                                    "name": "pubKey20",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "amount",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "tokenAddress",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint8",
+                                    "name": "contractType",
+                                    "type": "uint8"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "tokenId",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "senderAddress",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "timestamp",
+                                    "type": "uint256"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "inputs": [],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "getDepositCount",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "bytes32",
+                            "name": "messageHash",
+                            "type": "bytes32"
+                        },
+                        {
+                            "internalType": "bytes",
+                            "name": "signature",
+                            "type": "bytes"
+                        }
+                    ],
+                    "stateMutability": "pure",
+                    "type": "function",
+                    "name": "getSigner",
+                    "outputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "_tokenAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint8",
+                            "name": "_contractType",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "_amount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "_tokenId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "_pubKey20",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "payable",
+                    "type": "function",
+                    "name": "makeDeposit",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_index",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "_recipientAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "_recipientAddressHash",
+                            "type": "bytes32"
+                        },
+                        {
+                            "internalType": "bytes",
+                            "name": "_signature",
+                            "type": "bytes"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function",
+                    "name": "withdrawDeposit",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_index",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function",
+                    "name": "withdrawDepositSender",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ]
+                }
+            ],
+            "devdoc": {
+                "kind": "dev",
+                "methods": {},
+                "version": 1
+            },
+            "userdoc": {
+                "kind": "user",
+                "methods": {},
+                "version": 1
+            }
+        },
+        "settings": {
+            "remappings": [
+                ":eth-gas-reporter/=node_modules/eth-gas-reporter/",
+                ":hardhat/=node_modules/hardhat/"
+            ],
+            "optimizer": {
+                "enabled": true,
+                "runs": 200
+            },
+            "metadata": {
+                "bytecodeHash": "ipfs"
+            },
+            "compilationTarget": {
+                "contracts/interfaces/IPeanut.sol": "IPeanut"
+            },
+            "libraries": {}
+        },
+        "sources": {
+            "contracts/interfaces/IPeanut.sol": {
+                "keccak256": "0x12e2aaa077a3f883ecef223c1b51b508d0da68a82ab224117fe001d2941fbd87",
+                "urls": [
+                    "bzz-raw://0e1593b40444411cdab790b7e17c3a092d1106748c4d53b731a5e001e5cd5239",
+                    "dweb:/ipfs/QmcTbPUKCiDNGh4bXwF7xApqjVY8aq7xh2155BHLZ77Xnh"
+                ],
+                "license": "UNLICENSED"
+            }
+        },
+        "version": 1
+    },
+    "ast": {
+        "absolutePath": "contracts/interfaces/IPeanut.sol",
+        "id": 183,
+        "exportedSymbols": {
+            "IPeanut": [
+                182
+            ]
+        },
+        "nodeType": "SourceUnit",
+        "src": "39:1532:1",
+        "nodes": [
+            {
+                "id": 93,
+                "nodeType": "PragmaDirective",
+                "src": "39:23:1",
+                "nodes": [],
+                "literals": [
+                    "solidity",
+                    "^",
+                    "0.8",
+                    ".9"
+                ]
+            },
+            {
+                "id": 182,
+                "nodeType": "ContractDefinition",
+                "src": "64:1506:1",
+                "nodes": [
+                    {
+                        "id": 108,
+                        "nodeType": "StructDefinition",
+                        "src": "88:549:1",
+                        "nodes": [],
+                        "canonicalName": "IPeanut.Deposit",
+                        "members": [
+                            {
+                                "constant": false,
+                                "id": 95,
+                                "mutability": "mutable",
+                                "name": "pubKey20",
+                                "nameLocation": "121:8:1",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 108,
+                                "src": "113:16:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                },
+                                "typeName": {
+                                    "id": 94,
+                                    "name": "address",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "113:7:1",
+                                    "stateMutability": "nonpayable",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 97,
+                                "mutability": "mutable",
+                                "name": "amount",
+                                "nameLocation": "210:6:1",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 108,
+                                "src": "202:14:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                },
+                                "typeName": {
+                                    "id": 96,
+                                    "name": "uint256",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "202:7:1",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 99,
+                                "mutability": "mutable",
+                                "name": "tokenAddress",
+                                "nameLocation": "268:12:1",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 108,
+                                "src": "260:20:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                },
+                                "typeName": {
+                                    "id": 98,
+                                    "name": "address",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "260:7:1",
+                                    "stateMutability": "nonpayable",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 101,
+                                "mutability": "mutable",
+                                "name": "contractType",
+                                "nameLocation": "344:12:1",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 108,
+                                "src": "338:18:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint8",
+                                    "typeString": "uint8"
+                                },
+                                "typeName": {
+                                    "id": 100,
+                                    "name": "uint8",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "338:5:1",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint8",
+                                        "typeString": "uint8"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 103,
+                                "mutability": "mutable",
+                                "name": "tokenId",
+                                "nameLocation": "459:7:1",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 108,
+                                "src": "451:15:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                },
+                                "typeName": {
+                                    "id": 102,
+                                    "name": "uint256",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "451:7:1",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 105,
+                                "mutability": "mutable",
+                                "name": "senderAddress",
+                                "nameLocation": "537:13:1",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 108,
+                                "src": "529:21:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                },
+                                "typeName": {
+                                    "id": 104,
+                                    "name": "address",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "529:7:1",
+                                    "stateMutability": "nonpayable",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 107,
+                                "mutability": "mutable",
+                                "name": "timestamp",
+                                "nameLocation": "593:9:1",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 108,
+                                "src": "585:17:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                },
+                                "typeName": {
+                                    "id": 106,
+                                    "name": "uint256",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "585:7:1",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    }
+                                },
+                                "visibility": "internal"
+                            }
+                        ],
+                        "name": "Deposit",
+                        "nameLocation": "95:7:1",
+                        "scope": 182,
+                        "visibility": "public"
+                    },
+                    {
+                        "id": 123,
+                        "nodeType": "FunctionDefinition",
+                        "src": "643:200:1",
+                        "nodes": [],
+                        "functionSelector": "f3478011",
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "makeDeposit",
+                        "nameLocation": "652:11:1",
+                        "parameters": {
+                            "id": 119,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 110,
+                                    "mutability": "mutable",
+                                    "name": "_tokenAddress",
+                                    "nameLocation": "681:13:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 123,
+                                    "src": "673:21:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 109,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "673:7:1",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 112,
+                                    "mutability": "mutable",
+                                    "name": "_contractType",
+                                    "nameLocation": "710:13:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 123,
+                                    "src": "704:19:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint8",
+                                        "typeString": "uint8"
+                                    },
+                                    "typeName": {
+                                        "id": 111,
+                                        "name": "uint8",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "704:5:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint8",
+                                            "typeString": "uint8"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 114,
+                                    "mutability": "mutable",
+                                    "name": "_amount",
+                                    "nameLocation": "741:7:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 123,
+                                    "src": "733:15:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 113,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "733:7:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 116,
+                                    "mutability": "mutable",
+                                    "name": "_tokenId",
+                                    "nameLocation": "766:8:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 123,
+                                    "src": "758:16:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 115,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "758:7:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 118,
+                                    "mutability": "mutable",
+                                    "name": "_pubKey20",
+                                    "nameLocation": "792:9:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 123,
+                                    "src": "784:17:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 117,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "784:7:1",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "663:144:1"
+                        },
+                        "returnParameters": {
+                            "id": 122,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 121,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 123,
+                                    "src": "834:7:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 120,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "834:7:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "833:9:1"
+                        },
+                        "scope": 182,
+                        "stateMutability": "payable",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "id": 136,
+                        "nodeType": "FunctionDefinition",
+                        "src": "849:186:1",
+                        "nodes": [],
+                        "functionSelector": "30c7a3bb",
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "withdrawDeposit",
+                        "nameLocation": "858:15:1",
+                        "parameters": {
+                            "id": 132,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 125,
+                                    "mutability": "mutable",
+                                    "name": "_index",
+                                    "nameLocation": "891:6:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 136,
+                                    "src": "883:14:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 124,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "883:7:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 127,
+                                    "mutability": "mutable",
+                                    "name": "_recipientAddress",
+                                    "nameLocation": "915:17:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 136,
+                                    "src": "907:25:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 126,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "907:7:1",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 129,
+                                    "mutability": "mutable",
+                                    "name": "_recipientAddressHash",
+                                    "nameLocation": "950:21:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 136,
+                                    "src": "942:29:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bytes32",
+                                        "typeString": "bytes32"
+                                    },
+                                    "typeName": {
+                                        "id": 128,
+                                        "name": "bytes32",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "942:7:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bytes32",
+                                            "typeString": "bytes32"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 131,
+                                    "mutability": "mutable",
+                                    "name": "_signature",
+                                    "nameLocation": "994:10:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 136,
+                                    "src": "981:23:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bytes_memory_ptr",
+                                        "typeString": "bytes"
+                                    },
+                                    "typeName": {
+                                        "id": 130,
+                                        "name": "bytes",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "981:5:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bytes_storage_ptr",
+                                            "typeString": "bytes"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "873:137:1"
+                        },
+                        "returnParameters": {
+                            "id": 135,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 134,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 136,
+                                    "src": "1029:4:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 133,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1029:4:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1028:6:1"
+                        },
+                        "scope": 182,
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "id": 143,
+                        "nodeType": "FunctionDefinition",
+                        "src": "1041:71:1",
+                        "nodes": [],
+                        "functionSelector": "86720546",
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "withdrawDepositSender",
+                        "nameLocation": "1050:21:1",
+                        "parameters": {
+                            "id": 139,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 138,
+                                    "mutability": "mutable",
+                                    "name": "_index",
+                                    "nameLocation": "1080:6:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 143,
+                                    "src": "1072:14:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 137,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1072:7:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1071:16:1"
+                        },
+                        "returnParameters": {
+                            "id": 142,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 141,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 143,
+                                    "src": "1106:4:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 140,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1106:4:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1105:6:1"
+                        },
+                        "scope": 182,
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "id": 152,
+                        "nodeType": "FunctionDefinition",
+                        "src": "1118:118:1",
+                        "nodes": [],
+                        "functionSelector": "f7b2ec0d",
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "getSigner",
+                        "nameLocation": "1127:9:1",
+                        "parameters": {
+                            "id": 148,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 145,
+                                    "mutability": "mutable",
+                                    "name": "messageHash",
+                                    "nameLocation": "1154:11:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 152,
+                                    "src": "1146:19:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bytes32",
+                                        "typeString": "bytes32"
+                                    },
+                                    "typeName": {
+                                        "id": 144,
+                                        "name": "bytes32",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1146:7:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bytes32",
+                                            "typeString": "bytes32"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 147,
+                                    "mutability": "mutable",
+                                    "name": "signature",
+                                    "nameLocation": "1188:9:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 152,
+                                    "src": "1175:22:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bytes_memory_ptr",
+                                        "typeString": "bytes"
+                                    },
+                                    "typeName": {
+                                        "id": 146,
+                                        "name": "bytes",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1175:5:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bytes_storage_ptr",
+                                            "typeString": "bytes"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1136:67:1"
+                        },
+                        "returnParameters": {
+                            "id": 151,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 150,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 152,
+                                    "src": "1227:7:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 149,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1227:7:1",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1226:9:1"
+                        },
+                        "scope": 182,
+                        "stateMutability": "pure",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "id": 157,
+                        "nodeType": "FunctionDefinition",
+                        "src": "1242:59:1",
+                        "nodes": [],
+                        "functionSelector": "9363a141",
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "getDepositCount",
+                        "nameLocation": "1251:15:1",
+                        "parameters": {
+                            "id": 153,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "1266:2:1"
+                        },
+                        "returnParameters": {
+                            "id": 156,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 155,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 157,
+                                    "src": "1292:7:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 154,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1292:7:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1291:9:1"
+                        },
+                        "scope": 182,
+                        "stateMutability": "view",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "id": 165,
+                        "nodeType": "FunctionDefinition",
+                        "src": "1307:75:1",
+                        "nodes": [],
+                        "functionSelector": "9f9fb968",
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "getDeposit",
+                        "nameLocation": "1316:10:1",
+                        "parameters": {
+                            "id": 160,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 159,
+                                    "mutability": "mutable",
+                                    "name": "_index",
+                                    "nameLocation": "1335:6:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 165,
+                                    "src": "1327:14:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 158,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1327:7:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1326:16:1"
+                        },
+                        "returnParameters": {
+                            "id": 164,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 163,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 165,
+                                    "src": "1366:14:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_struct$_Deposit_$108_memory_ptr",
+                                        "typeString": "struct IPeanut.Deposit"
+                                    },
+                                    "typeName": {
+                                        "id": 162,
+                                        "nodeType": "UserDefinedTypeName",
+                                        "pathNode": {
+                                            "id": 161,
+                                            "name": "Deposit",
+                                            "nameLocations": [
+                                                "1366:7:1"
+                                            ],
+                                            "nodeType": "IdentifierPath",
+                                            "referencedDeclaration": 108,
+                                            "src": "1366:7:1"
+                                        },
+                                        "referencedDeclaration": 108,
+                                        "src": "1366:7:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_struct$_Deposit_$108_storage_ptr",
+                                            "typeString": "struct IPeanut.Deposit"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1365:16:1"
+                        },
+                        "scope": 182,
+                        "stateMutability": "view",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "id": 172,
+                        "nodeType": "FunctionDefinition",
+                        "src": "1388:67:1",
+                        "nodes": [],
+                        "functionSelector": "d3f3f5ea",
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "getAllDeposits",
+                        "nameLocation": "1397:14:1",
+                        "parameters": {
+                            "id": 166,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "1411:2:1"
+                        },
+                        "returnParameters": {
+                            "id": 171,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 170,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 172,
+                                    "src": "1437:16:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_array$_t_struct$_Deposit_$108_memory_ptr_$dyn_memory_ptr",
+                                        "typeString": "struct IPeanut.Deposit[]"
+                                    },
+                                    "typeName": {
+                                        "baseType": {
+                                            "id": 168,
+                                            "nodeType": "UserDefinedTypeName",
+                                            "pathNode": {
+                                                "id": 167,
+                                                "name": "Deposit",
+                                                "nameLocations": [
+                                                    "1437:7:1"
+                                                ],
+                                                "nodeType": "IdentifierPath",
+                                                "referencedDeclaration": 108,
+                                                "src": "1437:7:1"
+                                            },
+                                            "referencedDeclaration": 108,
+                                            "src": "1437:7:1",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_struct$_Deposit_$108_storage_ptr",
+                                                "typeString": "struct IPeanut.Deposit"
+                                            }
+                                        },
+                                        "id": 169,
+                                        "nodeType": "ArrayTypeName",
+                                        "src": "1437:9:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_array$_t_struct$_Deposit_$108_storage_$dyn_storage_ptr",
+                                            "typeString": "struct IPeanut.Deposit[]"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1436:18:1"
+                        },
+                        "scope": 182,
+                        "stateMutability": "view",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "id": 181,
+                        "nodeType": "FunctionDefinition",
+                        "src": "1461:107:1",
+                        "nodes": [],
+                        "functionSelector": "c38318c7",
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "getAllDepositsForAddress",
+                        "nameLocation": "1470:24:1",
+                        "parameters": {
+                            "id": 175,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 174,
+                                    "mutability": "mutable",
+                                    "name": "_address",
+                                    "nameLocation": "1512:8:1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 181,
+                                    "src": "1504:16:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 173,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1504:7:1",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1494:32:1"
+                        },
+                        "returnParameters": {
+                            "id": 180,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 179,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nameLocation": "-1:-1:-1",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 181,
+                                    "src": "1550:16:1",
+                                    "stateVariable": false,
+                                    "storageLocation": "memory",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_array$_t_struct$_Deposit_$108_memory_ptr_$dyn_memory_ptr",
+                                        "typeString": "struct IPeanut.Deposit[]"
+                                    },
+                                    "typeName": {
+                                        "baseType": {
+                                            "id": 177,
+                                            "nodeType": "UserDefinedTypeName",
+                                            "pathNode": {
+                                                "id": 176,
+                                                "name": "Deposit",
+                                                "nameLocations": [
+                                                    "1550:7:1"
+                                                ],
+                                                "nodeType": "IdentifierPath",
+                                                "referencedDeclaration": 108,
+                                                "src": "1550:7:1"
+                                            },
+                                            "referencedDeclaration": 108,
+                                            "src": "1550:7:1",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_struct$_Deposit_$108_storage_ptr",
+                                                "typeString": "struct IPeanut.Deposit"
+                                            }
+                                        },
+                                        "id": 178,
+                                        "nodeType": "ArrayTypeName",
+                                        "src": "1550:9:1",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_array$_t_struct$_Deposit_$108_storage_$dyn_storage_ptr",
+                                            "typeString": "struct IPeanut.Deposit[]"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1549:18:1"
+                        },
+                        "scope": 182,
+                        "stateMutability": "view",
+                        "virtual": false,
+                        "visibility": "external"
+                    }
+                ],
+                "abstract": false,
+                "baseContracts": [],
+                "canonicalName": "IPeanut",
+                "contractDependencies": [],
+                "contractKind": "interface",
+                "fullyImplemented": false,
+                "linearizedBaseContracts": [
+                    182
+                ],
+                "name": "IPeanut",
+                "nameLocation": "74:7:1",
+                "scope": 183,
+                "usedErrors": [],
+                "usedEvents": []
+            }
+        ],
+        "license": "UNLICENSED"
+    },
+    "id": 1
+}

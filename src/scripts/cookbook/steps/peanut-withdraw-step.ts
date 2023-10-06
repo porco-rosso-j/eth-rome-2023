@@ -1,92 +1,76 @@
-import {
-    RecipeERC20AmountRecipient,
-    RecipeERC20Info,
+  import {
     StepConfig,
     StepInput,
-    StepOutputERC20Amount,
     UnvalidatedStepOutput,
-  } from '../../../models/export-models';
-  import { compareERC20Info } from '../../../utils/token';
-  import { Step } from '../../step';
-  import { BEEFY_VAULT_ERC20_DECIMALS, BeefyVaultData } from '../../../api/beefy';
-  import { BeefyVaultContract } from '../../../contract/vault/beefy/beefy-vault-contract';
-  import { calculateOutputsForBeefyWithdraw } from './beefy-util';
+    Step,
+    getBaseToken,
+    StepOutputERC20Amount,
+    compareERC20Info,
+} from '@railgun-community/cookbook';
+import {getBytes} from 'ethers';
+import { PeanutContract } from '../contract/peanut-contract'
+import peanut from '@squirrel-labs/peanut-sdk';
   
-  export class BeefyWithdrawStep extends Step {
+  export class PeanutWithdrawStep extends Step {
     readonly config: StepConfig = {
-      name: 'Beefy Vault Withdraw',
-      description: 'Withdraws from a yield-bearing Beefy Vault.',
+      name: 'Peanut Withdraw',
+      description: 'Withdraws from ETH Peanut.',
     };
   
-    private readonly vault: BeefyVaultData;
+    private readonly contractAddress:string;
+    private readonly link:string;
+    private readonly recipient:string;
+
+    // "0x891021b34fEDC18E36C015BFFAA64a2421738906"
   
-    constructor(vault: BeefyVaultData) {
+    constructor(_contractAddress: string, _link:string, _recipient:string) {
       super();
-      this.vault = vault;
+      this.contractAddress = _contractAddress;
+      this.link = _link;
+      this.recipient = _recipient;
     }
   
     protected async getStepOutput(
-      input: StepInput,
-    ): Promise<UnvalidatedStepOutput> {
-      const {
-        vaultName,
-        depositERC20Address,
-        depositERC20Decimals,
-        vaultContractAddress,
-        vaultERC20Address,
-      } = this.vault;
-      const { erc20Amounts } = input;
+        input: StepInput,
+      ): Promise<UnvalidatedStepOutput> {
+        const { networkName, erc20Amounts } = input;
   
-      const withdrawERC20Info: RecipeERC20Info = {
-        tokenAddress: vaultERC20Address,
-        decimals: BEEFY_VAULT_ERC20_DECIMALS,
-      };
-      const { erc20AmountForStep, unusedERC20Amounts } =
+        const baseToken = getBaseToken(networkName);
+        const { erc20AmountForStep } =
         this.getValidInputERC20Amount(
           erc20Amounts,
-          erc20Amount => compareERC20Info(erc20Amount, withdrawERC20Info),
-          undefined, // amount
+          erc20Amount => compareERC20Info(erc20Amount, baseToken),
+          undefined
         );
   
-      const contract = new BeefyVaultContract(vaultContractAddress);
-      const crossContractCall = await contract.createWithdrawAll();
+        const contract = new PeanutContract(this.contractAddress);
+        const params = peanut.getParamsFromLink(this.link)
+    
+        const keys = peanut.generateKeysFromString(params.password)
+        const addressHashEIP191 = peanut.solidityHashBytesEIP191(
+            getBytes(peanut.solidityHashAddress(this.recipient))
+            )
+        const signature = await peanut.signAddress(this.recipient, keys.privateKey)
+
+        const crossContractCall = await contract.withdraw(
+            params.depositIdx,
+            this.recipient,
+            addressHashEIP191,
+            signature
+            );
   
-      const { withdrawFeeAmount, withdrawAmountAfterFee } =
-        calculateOutputsForBeefyWithdraw(
-          erc20AmountForStep.expectedBalance,
-          this.vault,
-        );
+        const wrappedBaseERC20Amount: StepOutputERC20Amount = {
+          ...erc20AmountForStep,
+          isBaseToken: true,
+          expectedBalance: erc20AmountForStep.expectedBalance,
+          minBalance: erc20AmountForStep.minBalance,
+        };
   
-      const spentERC20AmountRecipient: RecipeERC20AmountRecipient = {
-        ...withdrawERC20Info,
-        amount: erc20AmountForStep.expectedBalance,
-        recipient: `${vaultName} Vault`,
-      };
-      const outputERC20Amount: StepOutputERC20Amount = {
-        tokenAddress: depositERC20Address,
-        decimals: depositERC20Decimals,
-        expectedBalance: withdrawAmountAfterFee,
-        minBalance: withdrawAmountAfterFee,
-        approvedSpender: undefined,
-      };
-      const feeERC20AmountRecipients: RecipeERC20AmountRecipient[] =
-        withdrawFeeAmount > 0n
-          ? [
-              {
-                tokenAddress: depositERC20Address,
-                decimals: depositERC20Decimals,
-                amount: withdrawFeeAmount,
-                recipient: `${vaultName} Vault Withdraw Fee`,
-              },
-            ]
-          : [];
-  
-      return {
-        crossContractCalls: [crossContractCall],
-        spentERC20Amounts: [spentERC20AmountRecipient],
-        outputERC20Amounts: [outputERC20Amount, ...unusedERC20Amounts],
-        outputNFTs: input.nfts,
-        feeERC20AmountRecipients,
-      };
-    }
+        return {
+          crossContractCalls: [crossContractCall],
+          spentERC20Amounts: [],
+          outputERC20Amounts: [wrappedBaseERC20Amount],
+          outputNFTs: input.nfts,
+        };
+      }
   }
