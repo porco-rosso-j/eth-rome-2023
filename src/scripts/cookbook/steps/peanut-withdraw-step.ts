@@ -14,7 +14,7 @@ import peanut from '@squirrel-labs/peanut-sdk';
   export class PeanutWithdrawStep extends Step {
     readonly config: StepConfig = {
       name: 'Peanut Withdraw',
-      description: 'Withdraws from ETH Peanut.',
+      description: 'Withdraws ETH from Peanut.',
     };
   
     private readonly contractAddress:string;

@@ -17,12 +17,10 @@ import peanut from '@squirrel-labs/peanut-sdk';
     };
   
     private readonly contractAddress: string;
-    private readonly amount: number;
   
-    constructor(_contractAddress: string, _amount:number) {
+    constructor(_contractAddress: string) {
       super();
       this.contractAddress = _contractAddress;
-      this.amount = _amount;
     }
   
     protected async getStepOutput(
