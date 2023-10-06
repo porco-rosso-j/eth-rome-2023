@@ -5,7 +5,8 @@ import {
     startRailgunEngine,
     loadProvider,
     setOnBalanceUpdateCallback,
-    setOnMerkletreeScanCallback,
+    //setOnMerkletreeScanCallback,
+    setOnUTXOMerkletreeScanCallback,
     BalancesUpdatedCallback,
     setLoggers
 } from '@railgun-community/wallet';
@@ -54,7 +55,7 @@ export const initEngine = () => {
     setLogging();
   
     setOnBalanceUpdateCallback(MOCK_BALANCES_UPDATE_CALLBACK);
-    setOnMerkletreeScanCallback(merkletreeHistoryScanCallback);
+    setOnUTXOMerkletreeScanCallback(merkletreeHistoryScanCallback);
   };
 
 export const initEngineNetwork = async () => {
