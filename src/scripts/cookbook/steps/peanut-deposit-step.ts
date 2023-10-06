@@ -1,5 +1,4 @@
 import {
-  RecipeERC20Info,
   StepConfig,
   StepInput,
   UnvalidatedStepOutput,
@@ -16,11 +15,13 @@ import peanut from '@squirrel-labs/peanut-sdk';
       description: 'Deposits into Peanut Contract.',
     };
   
-    private readonly contractAddress: string;
+    protected readonly password:string;
+    protected readonly contractAddress: string;
   
-    constructor(_contractAddress: string) {
+    constructor(contractAddress: string, _password:string) {
       super();
-      this.contractAddress = _contractAddress;
+      this.contractAddress = contractAddress;
+      this.password = _password;
     }
   
     protected async getStepOutput(
@@ -36,17 +37,14 @@ import peanut from '@squirrel-labs/peanut-sdk';
         undefined
       );
 
-      const password = await peanut.getRandomString(16);
-      const pubkey = await peanut.generateKeysFromString(password);
-
+      const pubkey = await peanut.generateKeysFromString(this.password);
       const contract = new PeanutContract(this.contractAddress);
-      const crossContractCall = await contract.deposit(erc20Amounts[0].expectedBalance, pubkey.address); 
-
+      const crossContractCall = await contract.deposit(erc20AmountForStep.tokenAddress, erc20Amounts[0].expectedBalance, pubkey.address); 
       const spentBaseERC20Amount: RecipeERC20AmountRecipient = {
         ...baseToken,
         amount: erc20AmountForStep.expectedBalance,
         recipient: this.contractAddress, // rly?
-        // recipient: 'Wrapped Token Contract',
+        //recipient: 'Wrapped Token Contract',
       };
 
       return {

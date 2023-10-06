@@ -16,7 +16,7 @@ export class PeanutContract {
     )
   }
 
-  deposit(value:bigint, pubkey:string): Promise<ContractTransaction> {
+  deposit(tokenAddress:string, value:bigint, pubkey:string): Promise<ContractTransaction> {
     let popTx = this.contract.makeDeposit.populateTransaction(pubkey, {value:value});
     return popTx;
   }
