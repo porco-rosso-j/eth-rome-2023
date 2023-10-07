@@ -13,17 +13,17 @@ module.exports = function override(config, env) {
     "stream": require.resolve("stream-browserify"),
     "url": require.resolve("url/"),
     os: require.resolve("os-browserify"),
-    "crypto": require.resolve("crypto-browserify")
+    "crypto": require.resolve("crypto-browserify"),
   }
 
   config.plugins = (config.plugins || []).concat([
     new webpack.ProvidePlugin({
-      process: "process/browser",
+      // why need to add .js? 
+      process: "process/browser.js",
       Buffer: ["buffer", "Buffer"],
     }),
   ]);
 
-  config.resolve = { fallback: { 'process/browser': require.resolve('process/browser'), } }
 
 
   return config

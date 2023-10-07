@@ -7,6 +7,7 @@
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@railgun-community/cookbook": "^2.3.21",
+        "@railgun-community/quickstart": "^5.1.0",
         "@railgun-community/shared-models": "^5.5.5",
         "@railgun-community/waku-relayer-client": "^4.4.0",
         "@railgun-community/wallet": "5.8.11",

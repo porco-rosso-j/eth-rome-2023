@@ -4239,10 +4239,35 @@
     ethers "github:Railgun-Community/ethers.js#v6.7.6"
     graphql "^16.6.0"
 
+"@railgun-community/curve25519-scalarmult-wasm@0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@railgun-community/curve25519-scalarmult-wasm/-/curve25519-scalarmult-wasm-0.1.4.tgz#72f84f7d4d15a0deedb679860f07f59953dc21eb"
+  integrity sha512-8F5S6nGAZ/xO3mgFegLtwB9dcEs1Hynn+h775or4dFhWNP+Eh6c8N2vrdlkIfLZ+lFIP798lELBrQC0mplXE7A==
+
 "@railgun-community/curve25519-scalarmult-wasm@0.1.5":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@railgun-community/curve25519-scalarmult-wasm/-/curve25519-scalarmult-wasm-0.1.5.tgz#edb5e40a8f1fdb7f7e0de1d04e8badabe41cb2a8"
   integrity sha512-Cur8uM/IdNW3WzUwdPloDG1CF0rpSBDWq2yGXJMZ7IMeBGdc4Jj0h9tnNMFRZ35ZuCVVbZ3yClmqSa4PsbpdGQ==
+
+"@railgun-community/engine@5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@railgun-community/engine/-/engine-5.0.3.tgz#9fbe24a08b1f2435b43ff86e129776346b837f66"
+  integrity sha512-ltRFVkmcQZxjIDPNF2teZE4JNKO98YX8O39MwFnZjlULD0zgdQN0auPcwHUibHlk6DOKV+kXH98ncDaf6L9rDg==
+  dependencies:
+    "@noble/ed25519" "^1.7.1"
+    "@noble/hashes" "^1.3.0"
+    "@railgun-community/curve25519-scalarmult-wasm" "0.1.4"
+    "@scure/base" "^1.1.1"
+    abstract-leveldown "^7.2.0"
+    bn.js "^5.2.1"
+    buffer-xor "^2.0.2"
+    chai-as-promised "^7.1.1"
+    circomlibjs hsg88/circomlibjs#ffjavascrip.0.1.0
+    encoding-down "^7.1.0"
+    ethereum-cryptography "^2.0.0"
+    ethers "^6.4.0"
+    levelup "^5.1.1"
+    msgpack-lite "^0.1.26"
 
 "@railgun-community/engine@5.5.14":
   version "5.5.14"
@@ -4267,6 +4292,33 @@
     levelup "^5.1.1"
     lodash "^4.17.21"
     msgpack-lite "^0.1.26"
+
+"@railgun-community/quickstart@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@railgun-community/quickstart/-/quickstart-5.1.0.tgz#44307f71c704d659aa2a4b8542403fe45222d375"
+  integrity sha512-z8W9SXit0l8fe/sI9C2/DmgZDZUV2m133Rh7tD/U4bVnDI0weAbD1vx57saJ9RfeIhPocbc2GcP5T8B7OKTjGg==
+  dependencies:
+    "@graphql-mesh/cache-localforage" "^0.7.20"
+    "@graphql-mesh/cross-helpers" "^0.3.4"
+    "@graphql-mesh/graphql" "^0.34.16"
+    "@graphql-mesh/http" "^0.3.28"
+    "@graphql-mesh/merger-stitching" "^0.18.24"
+    "@graphql-mesh/runtime" "^0.46.23"
+    "@graphql-mesh/store" "^0.9.20"
+    "@graphql-mesh/types" "^0.91.14"
+    "@graphql-mesh/utils" "^0.43.22"
+    "@noble/ed25519" "^1.7.1"
+    "@railgun-community/engine" "5.0.3"
+    "@railgun-community/shared-models" "5.1.3"
+    "@whatwg-node/fetch" "^0.8.4"
+    axios "0.27.2"
+    brotli "^1.3.3"
+    graphql "^16.6.0"
+
+"@railgun-community/shared-models@5.1.3":
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@railgun-community/shared-models/-/shared-models-5.1.3.tgz#a7c31c89404fe0679fe4f60c60e1874e72079d25"
+  integrity sha512-rXg6BijIo/AEUBVDrTxxkauzS3SNlY5x9Gs2rW3/hNQc5t2vQBmNumVft4KQXv2xVQedqNh+NTiIZY/8asfWRg==
 
 "@railgun-community/shared-models@5.3.5":
   version "5.3.5"
@@ -8627,6 +8679,19 @@ ethereumjs-util@^7.1.1, ethereumjs-util@^7.1.2, ethereumjs-util@^7.1.5:
     "@ethersproject/wallet" "5.7.0"
     "@ethersproject/web" "5.7.1"
     "@ethersproject/wordlists" "5.7.0"
+
+ethers@^6.4.0:
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.7.1.tgz#9c65e8b5d8e9ad77b7e8cf1c46099892cfafad49"
+  integrity sha512-qX5kxIFMfg1i+epfgb0xF4WM7IqapIIu50pOJ17aebkxxa4BacW5jFrQRmCJpDEg2ZK2oNtR5QjrQ1WDBF29dA==
+  dependencies:
+    "@adraffy/ens-normalize" "1.9.2"
+    "@noble/hashes" "1.1.2"
+    "@noble/secp256k1" "1.7.1"
+    "@types/node" "18.15.13"
+    aes-js "4.0.0-beta.5"
+    tslib "2.4.0"
+    ws "8.5.0"
 
 "ethers@github:Railgun-Community/ethers.js#v6.7.6":
   version "6.7.6"

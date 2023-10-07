@@ -17,6 +17,8 @@ import {
   RailgunERC20AmountRecipient,
   RailgunWalletInfo,
 } from '@railgun-community/shared-models';
+
+
 import {
   RecipeERC20Amount,
   RecipeInput
@@ -24,7 +26,7 @@ import {
 import { PrivateTransferRecipe } from './cookbook/recipes/private-transfer-recipe';
 import { getGasDetailsERC20 } from './utils/gas';
 import { getPeanutLink } from "./utils/peanut"
-import { sendTxRailgunRelayer, getRelayer } from "./utils/relayer"
+import { getRailgunSmartWalletContractForNetwork } from '@railgun-community/quickstart';
 
 const peanutAddress = "0x891021b34fEDC18E36C015BFFAA64a2421738906"
 const chainGoerli = NETWORK_CONFIG.Ethereum_Goerli.chain;
@@ -35,7 +37,7 @@ export async function privateTransfer(
   encryptionKey: string,
   tokenAddr: string,
   amount: number
-): Promise<string> {
+): Promise<void> {
 
   /* TODO2: this initialization part should be moved out to somewhere else in browser
   initEngine();
@@ -80,10 +82,10 @@ export async function privateTransfer(
   const { crossContractCalls, feeERC20AmountRecipients } = await deposit.getRecipeOutput(recipeInput, false, true);
   console.log("crossContractCalls: ", crossContractCalls)
 
-  const selectedRelayer = await getRelayer(tokenAddr)
+  const selectedRelayer = getRailgunSmartWalletContractForNetwork(NetworkName.EthereumGoerli)
   const relayerFeeERC20AmountRecipient: RailgunERC20AmountRecipient = {
-    tokenAddress: selectedRelayer?.tokenAddress as string,
-    recipientAddress: selectedRelayer?.railgunAddress as string,
+    tokenAddress: tokenAddr,
+    recipientAddress: selectedRelayer?.address as string,
     amount: feeERC20AmountRecipients[0].amount
   }
 
@@ -133,13 +135,13 @@ export async function privateTransfer(
 
   console.log("transaction: ", transaction)
 
-  const txHash = await sendTxRailgunRelayer(transaction, selectedRelayer)
+  // const txHash = await sendTxRailgunRelayer(transaction, selectedRelayer)
 
-  let peanutLink: string | undefined;
-  setTimeout(async () => {
-    peanutLink = await getPeanutLink(amount, txHash, deposit.password)
-  }, 20000);
+  // let peanutLink: string | undefined;
+  // setTimeout(async () => {
+  //   peanutLink = await getPeanutLink(amount, txHash, deposit.password)
+  // }, 20000);
 
-  console.log("peanutLink: ", peanutLink)
-  return peanutLink as string
+  // console.log("peanutLink: ", peanutLink)
+  // return peanutLink as string
 }
