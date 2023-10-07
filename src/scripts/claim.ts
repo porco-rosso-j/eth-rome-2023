@@ -34,31 +34,7 @@ export async function privateClaim(
   railgunWalletInfo: RailgunWalletInfo,
   encryptionKey: string,
   link: string
-  // no need for railgun address as wallet can give it.
-) {
-
-  // initEngine();
-  // await initEngineNetwork();
-
-  // // @ts-ignore
-  // getProver().setSnarkJSGroth16(groth16 as SnarkJSGroth16);
-
-  // const encryptionKey = await pbkdf2(secret, "0x0", 1000000);
-
-  // const railgunWalletInfo = await createRailgunWallet(
-  //     encryptionKey,
-  //     mnemonic,
-  //     undefined, // creationBlockNumbers
-  //   );
-
-  // console.log("address", railgunWalletInfo.railgunAddress)
-  // console.log("id", railgunWalletInfo.id)
-
-  // if (!railgunWalletInfo) {
-  //     throw new Error('Expected railgunWalletInfo');
-  // }
-
-  // await setRailgunGas()
+):Promise<string | undefined> {
 
   const railgunWallet = await fullWalletForID(railgunWalletInfo.id);
   const railgunAddress = railgunWalletInfo.railgunAddress
@@ -145,7 +121,8 @@ export async function privateClaim(
 
   console.log("transaction: ", transaction)
   // Submit transaction to RPC.
-  await sendTx(transaction)
+  const txHash: string | undefined = await sendTx(transaction)
+  return txHash;
 
   // const txHash = await sendTxRailgunRelayer(transaction, selectedRelayer)
   // console.log("txHash: ", txHash)

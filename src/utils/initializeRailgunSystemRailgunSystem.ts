@@ -10,7 +10,6 @@ import {
   // populateProvedCrossContractCalls
 } from '@railgun-community/wallet';
 
-
 export default async function initializeRailgunSystem() {
   initEngine();
   await initEngineNetwork();
