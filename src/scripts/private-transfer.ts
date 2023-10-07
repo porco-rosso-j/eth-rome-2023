@@ -30,7 +30,7 @@ import {
   const chainGoerli = NETWORK_CONFIG.Ethereum_Goerli.chain;
   
   // TODO1: should return link
-  export async function private_transfer(
+  export async function privateTransfer(
     railgunWalletInfo:RailgunWalletInfo, 
     encryptionKey:string, 
     tokenAddr:string, 

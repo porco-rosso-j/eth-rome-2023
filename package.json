@@ -2,7 +2,6 @@
     "name": "eth-rome",
     "version": "1.0.0",
     "license": "MIT",
-    "type": "module",
     "dependencies": {
         "@chakra-ui/react": "^2.8.1",
         "@emotion/react": "^11.11.1",
@@ -16,29 +15,38 @@
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
         "@types/jest": "^27.5.2",
+        "@types/level-js": "^4.0.3",
         "@types/leveldown": "^4.0.3",
         "@types/node": "^16.18.57",
         "@types/react": "^18.2.25",
         "@types/react-dom": "^18.2.10",
         "@types/snarkjs": "^0.7.3",
+        "browserify-zlib": "^0.2.0",
+        "buffer": "^6.0.3",
         "dotenv": "^16.3.1",
         "ethers": "github:Railgun-Community/ethers.js#v6.7.6",
         "ethers5": "npm:ethers@5.7.2",
         "framer-motion": "^10.16.4",
+        "level-js": "^6.1.0",
         "leveldown": "^6.1.1",
+        "os-browserify": "^0.3.0",
+        "path-browserify": "^1.0.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-scripts": "5.0.1",
         "snarkjs": "0.7.0",
+        "stream-browserify": "^3.0.0",
+        "stream-http": "^3.2.0",
         "ts-node": "^10.9.1",
         "typescript": "^4.9.5",
+        "url": "^0.11.3",
         "web-vitals": "^2.1.4"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "start": "react-app-rewired start",
+        "build": "react-app-rewired build",
+        "test": "react-app-rewired test",
+        "eject": "react-app-rewired eject"
     },
     "eslintConfig": {
         "extends": [
@@ -57,5 +65,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "react-app-rewired": "^2.2.1"
     }
 }

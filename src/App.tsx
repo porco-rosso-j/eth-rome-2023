@@ -1,9 +1,11 @@
 import WalletLogin from 'src/components/WalletLogin'
 import Header from 'src/components/Header'
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Box } from "@chakra-ui/react";
 import useUserCredential from 'src/hooks/useUserCredential';
 import UserCredentialContext from 'src/context/userCredential';
-
+import MainPage from 'src/components/MainPage';
+import initializeRailgunSystem from 'src/utils/initializeRailgunSystemRailgunSystem';
+import { useEffect } from 'react';
 export default function App() {
   const {
     mnemonic,
@@ -12,6 +14,15 @@ export default function App() {
     savePassword,
     logout
   } = useUserCredential();
+
+
+  useEffect(() => {
+    async function init() {
+      await initializeRailgunSystem()
+    }
+    init();
+  }, [])
+
   return <ChakraProvider>
     <UserCredentialContext.Provider value={{
       mnemonic,
@@ -23,7 +34,9 @@ export default function App() {
       <div>
         <Header />
         {
-          (!mnemonic || !password) ? <WalletLogin /> : <div>logged in</div>
+          (!mnemonic || !password) ? <WalletLogin /> : <Box p="16px">
+            <MainPage />
+          </Box>
         }
 
       </div>
