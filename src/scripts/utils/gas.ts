@@ -52,10 +52,19 @@ export async function getGasDetailsERC20(
         undefined
     )
 
-      const gasDetails: TransactionGasDetails = {
-        evmGasType: EVMGasType.Type1, // Depends on the chain (BNB uses type 0)
+    // for railgun relayer
+    //   const gasDetails: TransactionGasDetails = {
+    //     evmGasType: EVMGasType.Type1, // Depends on the chain (BNB uses type 0)
+    //     gasEstimate: gasEstimate, // Output from gasEstimateForDeposit
+    //     gasPrice: BigInt('0x10000')
+    //   }
+
+    // for EOA relayer
+    const gasDetails: TransactionGasDetails = {
+        evmGasType: EVMGasType.Type2, // Depends on the chain (BNB uses type 0)
         gasEstimate: gasEstimate, // Output from gasEstimateForDeposit
-        gasPrice: BigInt('0x10000')
+        maxFeePerGas: BigInt('0x100000'), // Current gas Max Fee
+        maxPriorityFeePerGas: BigInt('0x010000'), // Current gas Max Priority Fee
       }
 
     return gasDetails

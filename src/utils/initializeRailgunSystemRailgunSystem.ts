@@ -14,7 +14,6 @@ import {
 export default async function initializeRailgunSystem() {
   initEngine();
   await initEngineNetwork();
-
   
   const groth16 = (global as unknown as { snarkjs: { groth16: SnarkJSGroth16 } })
     .snarkjs.groth16;

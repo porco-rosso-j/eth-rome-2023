@@ -14,7 +14,6 @@ import {
   NetworkName,
   NETWORK_CONFIG,
   RailgunERC20Recipient,
-  RailgunERC20AmountRecipient,
   RailgunWalletInfo
 } from '@railgun-community/shared-models';
 import {
@@ -24,7 +23,7 @@ import {
 import { PrivateClaimRecipe } from './cookbook/recipes/private-claim-recipe';
 import { getPeanutTokenAmountFromLink } from "./utils/peanut"
 import { getGasDetailsERC20 } from './utils/gas';
-import { getRailgunSmartWalletContractForNetwork } from '@railgun-community/quickstart';
+import {sendTx} from "./utils/relayer"
 
 const peanutAddress = "0x891021b34fEDC18E36C015BFFAA64a2421738906"
 const railgunAdaptorAddress = "0x14a57CA7C5c1AD54fB6c642f428d973fcD696ED4"
@@ -86,13 +85,13 @@ export async function privateClaim(
   const claim = new PrivateClaimRecipe(peanutAddress, link, railgunAdaptorAddress); // 10n == 0.1%
   const { crossContractCalls, feeERC20AmountRecipients } = await claim.getRecipeOutput(recipeInput, true, false);
 
-  const selectedRelayer = await getRailgunSmartWalletContractForNetwork(NetworkName.EthereumGoerli)
+  //const selectedRelayer = await getRailgunSmartWalletContractForNetwork(NetworkName.EthereumGoerli)
   // console.log("selectedRelayer?.tokenFee: ", selectedRelayer?.tokenFee)
-  const relayerFeeERC20AmountRecipient: RailgunERC20AmountRecipient = {
-    tokenAddress: WETH_GOERLI as string,
-    recipientAddress: selectedRelayer?.address as string,
-    amount: feeERC20AmountRecipients[0].amount
-  }
+//   const relayerFeeERC20AmountRecipient: RailgunERC20AmountRecipient = {
+//     tokenAddress: WETH_GOERLI as string,
+//     recipientAddress: selectedRelayer?.address as string,
+//     amount: feeERC20AmountRecipients[0].amount
+//   }
 
   const railgunERC20Recipient: RailgunERC20Recipient = {
     tokenAddress: shieldERC20Amounts.tokenAddress,
@@ -110,7 +109,7 @@ export async function privateClaim(
     crossContractCalls
   )
 
-  const sendWithPublicWallet = false
+  const sendWithPublicWallet = true
 
   await generateCrossContractCallsProof(
     NetworkName.EthereumGoerli,
@@ -121,7 +120,8 @@ export async function privateClaim(
     [railgunERC20Recipient],
     [],
     crossContractCalls,
-    relayerFeeERC20AmountRecipient,
+    //relayerFeeERC20AmountRecipient,
+    undefined,
     sendWithPublicWallet,
     BigInt('0x1000'),
     undefined,
@@ -136,15 +136,17 @@ export async function privateClaim(
     [railgunERC20Recipient],
     [],
     crossContractCalls,
-    relayerFeeERC20AmountRecipient,
+    // relayerFeeERC20AmountRecipient,
+    undefined,
     sendWithPublicWallet,
     BigInt('0x1000'),
     gasDetails
   );
 
   console.log("transaction: ", transaction)
-
   // Submit transaction to RPC.
+  await sendTx(transaction)
+
   // const txHash = await sendTxRailgunRelayer(transaction, selectedRelayer)
   // console.log("txHash: ", txHash)
 

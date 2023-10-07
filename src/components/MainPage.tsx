@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import getRailgunWallet from 'src/utils/getRailgunWallet';
 import UserCredentialContext from 'src/context/userCredential';
 import { privateTransfer } from 'src/scripts/private-transfer';
+import { privateClaim } from 'src/scripts/claim';
 import { TOKEN_ADDRESSES } from 'src/constants';
 
 
@@ -23,6 +24,13 @@ const MainPage = () => {
   }
 
   const onPrivateClaim = async () => {
+    const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, mnemonic);
+    console.log('railgunWalletInfo :', railgunWalletInfo);
+    await privateClaim(
+      railgunWalletInfo,
+      encryptionKey,
+      "https://peanut.to/claim#?c=5&v=v4&i=3538&p=vXUNd4uwp5GzMHyd&t=ui"
+    )
   }
 
   return (

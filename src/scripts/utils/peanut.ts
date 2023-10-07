@@ -3,9 +3,8 @@ import artifact from "../cookbook/contract/IPeanut.json";
 import { providers, Contract } from "ethers5"
 //https://dev.to/atosh502/install-multiple-versions-of-same-package-using-yarn-2668
 import peanut from '@squirrel-labs/peanut-sdk';
-import * as dotenv from "dotenv";
-dotenv.config();
-const provider = new providers.JsonRpcProvider(process.env.ALCHEMY_GOERLI as string, 5)
+import {ALCHEMY_GOERLI} from "./secret"
+const provider = new providers.JsonRpcProvider(ALCHEMY_GOERLI)
 const contract = new Contract(
   "0x891021b34fEDC18E36C015BFFAA64a2421738906",
   artifact.abi,
@@ -19,7 +18,6 @@ export async function getPeanutLink(amount: number, txHash: string, password: st
     tokenAmount: amount,
     tokenType: 0,  // 0 for ether, 1 for erc20, 2 for erc721, 3 for erc1155
   }
-
 
   console.log("provider: ", provider)
 

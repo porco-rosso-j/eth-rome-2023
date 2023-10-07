@@ -8,8 +8,17 @@
 // import { RailgunSmartWalletContract } from '@railgun-community/engine';
 // import * as relayerClient from "@railgun-community/waku-relayer-client"
 // import { RelayerConnectionStatusCallback, RelayerTransaction } from "@railgun-community/waku-relayer-client"
-import { Optional } from "./type"
 
+import { Wallet, providers } from 'ethers5';
+import {PRIVATE_KEY, ALCHEMY_GOERLI} from "./secret"
+const provider = new providers.JsonRpcProvider(ALCHEMY_GOERLI)
+const wallet = new Wallet(PRIVATE_KEY, provider);
+
+export async function sendTx(transaction: any):Promise<string> {
+    const res = await wallet.sendTransaction(transaction);
+    console.log("res :", res?.hash)
+    return res?.hash;
+}
 
 // const Goerli: Chain = {
 //   type: ChainType.EVM,

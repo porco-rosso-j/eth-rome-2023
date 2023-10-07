@@ -17,16 +17,14 @@ import {
   RailgunERC20AmountRecipient,
   RailgunWalletInfo,
 } from '@railgun-community/shared-models';
-
-
 import {
   RecipeERC20Amount,
   RecipeInput
 } from "@railgun-community/cookbook"
 import { PrivateTransferRecipe } from './cookbook/recipes/private-transfer-recipe';
-import { getGasDetailsERC20 } from './utils/gas';
+import { getGasDetailsERC20, setRailgunGas} from './utils/gas';
 import { getPeanutLink } from "./utils/peanut"
-import { getRailgunSmartWalletContractForNetwork } from '@railgun-community/quickstart';
+import {sendTx} from "./utils/relayer"
 
 const peanutAddress = "0x891021b34fEDC18E36C015BFFAA64a2421738906"
 const chainGoerli = NETWORK_CONFIG.Ethereum_Goerli.chain;
@@ -57,9 +55,9 @@ export async function privateTransfer(
   if (!railgunWalletInfo) {
       throw new Error('Expected railgunWalletInfo');
   }
-
-  await setRailgunGas()
+  
   */ /// 
+  await setRailgunGas()
 
   const railgunWallet = await fullWalletForID(railgunWalletInfo.id);
   const railgunAddress = railgunWalletInfo.railgunAddress
@@ -82,16 +80,16 @@ export async function privateTransfer(
   const { crossContractCalls, feeERC20AmountRecipients } = await deposit.getRecipeOutput(recipeInput, false, true);
   console.log("crossContractCalls: ", crossContractCalls)
 
-  const selectedRelayer = getRailgunSmartWalletContractForNetwork(NetworkName.EthereumGoerli)
-  const relayerFeeERC20AmountRecipient: RailgunERC20AmountRecipient = {
-    tokenAddress: tokenAddr,
-    recipientAddress: selectedRelayer?.address as string,
-    amount: feeERC20AmountRecipients[0].amount
-  }
+//   const selectedRelayer = getRailgunSmartWalletContractForNetwork(NetworkName.EthereumGoerli)
+//   const relayerFeeERC20AmountRecipient: RailgunERC20AmountRecipient = {
+//     tokenAddress: tokenAddr,
+//     recipientAddress: selectedRelayer?.address as string,
+//     amount: feeERC20AmountRecipients[0].amount
+//   }
 
-  const sendWithPublicWallet = false
+  const sendWithPublicWallet = true
 
-  console.log("relayerFeeERC20AmountRecipient: ", relayerFeeERC20AmountRecipient)
+ // console.log("relayerFeeERC20AmountRecipient: ", relayerFeeERC20AmountRecipient)
 
   await refreshRailgunBalances(chainGoerli, railgunWallet.id, false);
 
@@ -112,7 +110,8 @@ export async function privateTransfer(
     [],
     [],
     crossContractCalls,
-    relayerFeeERC20AmountRecipient,
+    // relayerFeeERC20AmountRecipient,
+    undefined,
     sendWithPublicWallet,
     BigInt('0x1000'),
     undefined,
@@ -127,7 +126,8 @@ export async function privateTransfer(
     [],
     [],
     crossContractCalls,
-    relayerFeeERC20AmountRecipient,
+    // relayerFeeERC20AmountRecipient,
+    undefined,
     sendWithPublicWallet,
     BigInt('0x1000'),
     gasDetails
@@ -136,12 +136,15 @@ export async function privateTransfer(
   console.log("transaction: ", transaction)
 
   // const txHash = await sendTxRailgunRelayer(transaction, selectedRelayer)
+  const txHash: string | undefined = await sendTx(transaction)
+  //await sendTx(transaction)
 
-  // let peanutLink: string | undefined;
-  // setTimeout(async () => {
-  //   peanutLink = await getPeanutLink(amount, txHash, deposit.password)
-  // }, 20000);
+
+  let peanutLink: string | undefined;
+  setTimeout(async () => {
+    peanutLink = await getPeanutLink(amount, txHash, deposit.password)
+    return peanutLink as string
+  }, 25000); //25 sec
 
   // console.log("peanutLink: ", peanutLink)
-  // return peanutLink as string
 }
