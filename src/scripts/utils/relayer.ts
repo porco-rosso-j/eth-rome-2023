@@ -10,13 +10,15 @@
 // import { RelayerConnectionStatusCallback, RelayerTransaction } from "@railgun-community/waku-relayer-client"
 
 import { Wallet, providers } from 'ethers5';
-import {PRIVATE_KEY, ALCHEMY_GOERLI} from "./secret"
+const ALCHEMY_GOERLI = process.env.REACT_APP_ALCHEMY_GOERLI
+const PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY
 const provider = new providers.JsonRpcProvider(ALCHEMY_GOERLI)
 const wallet = new Wallet(PRIVATE_KEY, provider);
 
-export async function sendTx(transaction: any):Promise<string> {
+export async function sendTx(transaction: any): Promise<string> {
     const res = await wallet.sendTransaction(transaction);
     console.log("res :", res?.hash)
+    await res?.wait();
     return res?.hash;
 }
 
