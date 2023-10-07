@@ -6,3 +6,5 @@
 
 
 // export async function private_claim(recipientRailgunAddress, link)
+
+export {} 
