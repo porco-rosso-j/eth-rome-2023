@@ -8,7 +8,7 @@ import {
 } from '@railgun-community/cookbook';
 import { PeanutWithdrawStep } from '../steps/peanut-withdraw-step';
 
-export class TestWithdrawRecipe extends Recipe {
+export class PrivateClaimRecipe extends Recipe {
   readonly config: RecipeConfig = {
     name: 'Peanut Claim Recipe',
     description:
@@ -20,13 +20,12 @@ export class TestWithdrawRecipe extends Recipe {
   private readonly link:string;
   private readonly recipient:string;
 
-  constructor(contractAddress: string,  _link:string, _recipient:string) {
+  constructor(_contractAddress: string,  _link:string, _recipient:string) {
     super();
-    this.contractAddress = contractAddress;
+    this.contractAddress = _contractAddress;
     this.link = _link;
     this.recipient = _recipient;
   }
-
 
   protected supportsNetwork(networkName: NetworkName): boolean {
     // return BeefyAPI.supportsNetwork(networkName);

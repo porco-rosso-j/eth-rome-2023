@@ -136,7 +136,7 @@ import {
     const txHash = await sendTxRailgunRelayer(transaction, selectedRelayer)
     
     let peanutLink: string | undefined;
-    setTimeout(async () => {  
+    await setTimeout(async () => {  
        peanutLink = await getPeanutLink(amount, txHash, deposit.password)
     }, 20000);
   

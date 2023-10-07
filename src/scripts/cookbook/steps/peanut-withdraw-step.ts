@@ -1,4 +1,4 @@
-  import {
+import {
     StepConfig,
     StepInput,
     UnvalidatedStepOutput,
@@ -14,14 +14,12 @@ import peanut from '@squirrel-labs/peanut-sdk';
   export class PeanutWithdrawStep extends Step {
     readonly config: StepConfig = {
       name: 'Peanut Withdraw',
-      description: 'Withdraws from ETH Peanut.',
+      description: 'Withdraws ETH from Peanut.',
     };
   
     private readonly contractAddress:string;
     private readonly link:string;
     private readonly recipient:string;
-
-    // "0x891021b34fEDC18E36C015BFFAA64a2421738906"
   
     constructor(_contractAddress: string, _link:string, _recipient:string) {
       super();
@@ -45,11 +43,13 @@ import peanut from '@squirrel-labs/peanut-sdk';
   
         const contract = new PeanutContract(this.contractAddress);
         const params = peanut.getParamsFromLink(this.link)
-    
+
         const keys = peanut.generateKeysFromString(params.password)
+
         const addressHashEIP191 = peanut.solidityHashBytesEIP191(
             getBytes(peanut.solidityHashAddress(this.recipient))
             )
+
         const signature = await peanut.signAddress(this.recipient, keys.privateKey)
 
         const crossContractCall = await contract.withdraw(
