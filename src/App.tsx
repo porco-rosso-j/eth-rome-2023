@@ -1,4 +1,5 @@
 import WalletLogin from 'src/components/WalletLogin'
+import React from 'react'
 import Header from 'src/components/Header'
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import useUserCredential from 'src/hooks/useUserCredential';
@@ -6,7 +7,7 @@ import UserCredentialContext from 'src/context/userCredential';
 import MainPage from 'src/components/MainPage';
 import initializeRailgunSystem from 'src/utils/initializeRailgunSystemRailgunSystem';
 import { useEffect } from 'react';
-export default function App() {
+function App() {
   const {
     mnemonic,
     password,
@@ -43,3 +44,5 @@ export default function App() {
     </UserCredentialContext.Provider>
   </ChakraProvider>
 }
+
+export default App

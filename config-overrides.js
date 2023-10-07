@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 module.exports = function override(config, env) {
-  console.log('override')
+
   let loaders = config.resolve
   loaders.fallback = {
     "fs": false,
@@ -22,6 +22,9 @@ module.exports = function override(config, env) {
       Buffer: ["buffer", "Buffer"],
     }),
   ]);
+
+  config.resolve = { fallback: { 'process/browser': require.resolve('process/browser'), } }
+
 
   return config
 }

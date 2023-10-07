@@ -1,5 +1,5 @@
 import { Contract, ContractTransaction, Provider } from 'ethers';
-import artifact from "./IPeanut.json" assert { type: "json" };
+import artifact from "./IPeanut.json";
 import { validateContractAddress } from '../utils/address';
 
 export class PeanutContract {
@@ -16,12 +16,12 @@ export class PeanutContract {
     )
   }
 
-  deposit(tokenAddress:string, value:bigint, pubkey:string): Promise<ContractTransaction> {
-    let popTx = this.contract.makeDeposit.populateTransaction(pubkey, {value:value});
+  deposit(tokenAddress: string, value: bigint, pubkey: string): Promise<ContractTransaction> {
+    let popTx = this.contract.makeDeposit.populateTransaction(pubkey, { value: value });
     return popTx;
   }
 
-  withdraw(index:number, recipientAddress:string, recipientAddressHash:string, signature:string): Promise<ContractTransaction> {
+  withdraw(index: number, recipientAddress: string, recipientAddressHash: string, signature: string): Promise<ContractTransaction> {
     return this.contract.withdraw.populateTransaction(index, recipientAddress, recipientAddressHash, signature);
   }
 }

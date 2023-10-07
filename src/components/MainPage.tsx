@@ -14,12 +14,12 @@ const MainPage = () => {
   const onPrivateTransfer = async () => {
     const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, mnemonic);
     console.log('railgunWalletInfo :', railgunWalletInfo);
-    // await privateTransfer(
-    //   railgunWalletInfo,
-    //   encryptionKey,
-    //   TOKEN_ADDRESSES.WETH,
-    //   0.0001
-    // )
+    await privateTransfer(
+      railgunWalletInfo,
+      encryptionKey,
+      TOKEN_ADDRESSES.WETH,
+      0.0001
+    )
   }
 
   const onPrivateClaim = async () => {
