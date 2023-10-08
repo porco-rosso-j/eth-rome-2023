@@ -133,6 +133,7 @@ const MainPage = () => {
       setLoading(false);
       console.error(err);
     }
+    setLoading(false);
   }
 
   return (
