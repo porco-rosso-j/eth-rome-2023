@@ -1,6 +1,6 @@
 ## Ghost Pay 👻
 
-GhostPay lets anyone privately send and receive crypto with the sharable URL link. This is built at ETH Rome 2023. The project page is [here](https://taikai.network/ethrome/hackathons/ethrome-23/projects/clnfwynab00eswu01pbnmnjif/idea)
+GhostPay lets anyone privately send and receive crypto with the sharable URL link. Plus, users have the freedom to receive/claim crypto in any tokens they preferred. This is built at ETH Rome 2023. The project page is [here](https://taikai.network/ethrome/hackathons/ethrome-23/projects/clnfwynab00eswu01pbnmnjif/idea)
 
 - [Railgun](https://www.railgun.org/): An on-chain & smart contract-based system for private Ethereum/EVM DeFi.
 - [Peanut Protocol](https://peanut.to/): A protocol to transfer tokens using URLs
