@@ -190,7 +190,7 @@ const MainPage = () => {
                   </Tag>
                 </Box>
               }
-              <Button onClick={onPrivateClaim} >Confirm</Button>
+              <Button onClick={onPrivateClaim} w="100%" mt="16px">{receiveAsset === "USDC" ? "Withdraw & Swap" : "Withdraw"} </Button>
               {loading && <Flex minH={200} justifyContent="center" alignItems="center"
                 pos="absolute" left="0" top="0" right="0" bottom="0" background="white" opacity={0.8}>
                 <Spinner />
@@ -225,10 +225,10 @@ const MainPage = () => {
                 <label>2. amount</label>
                 <Input placeholder="0.001" onChange={(e) => setTransferAmount(e.target.value)} />
               </Box>
-              <Box>
+              <Box >
                 {errorMessage}
               </Box>
-              <Button onClick={onPrivateTransfer}>Confirm</Button>
+              <Button onClick={onPrivateTransfer} w="100%" mt="16px">Confirm</Button>
               {loading && <Flex minH={200} justifyContent="center" alignItems="center"
                 pos="absolute" left="0" top="0" right="0" bottom="0" background="white" opacity={0.8}>
                 <Spinner />
