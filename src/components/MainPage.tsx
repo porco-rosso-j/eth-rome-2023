@@ -143,7 +143,7 @@ const MainPage = () => {
         </Stat>
         <Stat>
           <StatLabel>USDC</StatLabel>
-          <StatNumber> {USDCBalance / 1e12}</StatNumber>
+          <StatNumber> {USDCBalance / 1e6}</StatNumber>
         </Stat>
       </Card>
       <Tabs variant="enclosed">

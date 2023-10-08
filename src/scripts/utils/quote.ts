@@ -16,6 +16,8 @@ const USDC_GOERLI = "0x07865c6E87B9F70255377e024ace6630C1Eaa37F"
 export async function quoteWETHtoUSDC(amount: number):Promise<number> {
     ZeroXConfig.API_KEY = process.env.REACT_APP_ZERO_X_API_KEY;
 
+    console.log("amount: ", amount)
+
     const sellERC20Info: RecipeERC20Info = {
         tokenAddress: WETH_GOERLI, 
         decimals: BigInt('0x12'),
@@ -30,7 +32,7 @@ export async function quoteWETHtoUSDC(amount: number):Promise<number> {
     
     const sellERC20Amount: RecipeERC20Amount = {
         ...sellERC20Info,
-        amount:  BigInt(amount*1e18),
+        amount:  BigInt(amount),
     }
 
     const swapQuoteParam:SwapQuoteParams = {
@@ -44,7 +46,7 @@ export async function quoteWETHtoUSDC(amount: number):Promise<number> {
     const ret = await ZeroXQuote.getSwapQuote(swapQuoteParam)
     console.log("ret: ", ret)
 
-    const output = Math.floor((Number(ret.buyERC20Amount.amount) / 1e12))
+    const output = Math.floor((Number(ret.buyERC20Amount.amount)/1e6))
     console.log("output: ", output)
     return output
 }
