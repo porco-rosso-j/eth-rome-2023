@@ -192,8 +192,8 @@ const MainPage = () => {
               }
               <Button onClick={onPrivateClaim} w="100%" mt="16px">{receiveAsset === "USDC" ? "Withdraw & Swap" : "Withdraw"} </Button>
               {loading && <Flex minH={200} justifyContent="center" alignItems="center"
-                pos="absolute" left="0" top="0" right="0" bottom="0" background="white" opacity={0.8}>
-                <Spinner />
+                pos="absolute" left="0" top="0" right="0" bottom="0" background="white" opacity={0.5}>
+                <Spinner color='gray.800' />
               </Flex>}
             </Box>
 
@@ -230,8 +230,8 @@ const MainPage = () => {
               </Box>
               <Button onClick={onPrivateTransfer} w="100%" mt="16px">Confirm</Button>
               {loading && <Flex minH={200} justifyContent="center" alignItems="center"
-                pos="absolute" left="0" top="0" right="0" bottom="0" background="white" opacity={0.8}>
-                <Spinner />
+                pos="absolute" left="0" top="0" right="0" bottom="0" background="white" opacity={0.5}>
+                <Spinner color='gray.800' />
               </Flex>}
             </Box>
             <Box>
