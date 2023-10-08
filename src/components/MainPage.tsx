@@ -81,51 +81,58 @@ const MainPage = () => {
   const onPrivateTransfer = async () => {
     setLoading(true);
 
-    if (transferAmount === '') {
-      setErrorMessage('Please input amount');
-      return;
+    try {
+      if (transferAmount === '') {
+        setErrorMessage('Please input amount');
+        return;
+      }
+      const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, railgunWalletID, railgunWalletMnemonic);
+      const transferResult = await privateTransfer(
+        railgunWalletInfo,
+        encryptionKey,
+        transferTokenAddress,
+        Number(transferAmount)
+      )
+      setTransferTxRecords(prev => [...prev, transferResult])
+      console.log('transferResult :', transferResult);
+    } catch (err) {
+      setLoading(false);
+      console.error(err);
     }
-    const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, railgunWalletID, railgunWalletMnemonic);
-    console.log('railgunWalletInfo :', railgunWalletInfo);
-    const transferResult = await privateTransfer(
-      railgunWalletInfo,
-      encryptionKey,
-      transferTokenAddress,
-      Number(transferAmount)
-    )
-    setTransferTxRecords(prev => [...prev, transferResult])
     setLoading(false);
-    console.log('transferResult :', transferResult);
+
   }
 
   const onPrivateClaim = async () => {
     setLoading(true);
-    if (!claimPeanutLink) {
-      setErrorMessage('Please input peanut link');
+    try {
+      if (!claimPeanutLink) {
+        setErrorMessage('Please input peanut link');
+      }
+      const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, railgunWalletID, railgunWalletMnemonic);
+      console.log('railgunWalletInfo :', railgunWalletInfo);
+
+      if (receiveAsset === 'USDC') {
+        console.log('using privateClaimSwap');
+        const txHash = await privateClaimSwap(
+          railgunWalletInfo,
+          encryptionKey,
+          claimPeanutLink || "https://peanut.to/claim#?c=5&v=v4&i=3555&p=kvVyr6ntko291LTL&t=ui"
+        )
+        setClaimTxRecords(prev => [...prev, { txHash }])
+      } else if (receiveAsset === 'WETH') {
+        console.log('using privateClaim');
+        const txHash = await privateClaim(
+          railgunWalletInfo,
+          encryptionKey,
+          claimPeanutLink || "https://peanut.to/claim#?c=5&v=v4&i=3555&p=kvVyr6ntko291LTL&t=ui"
+        )
+        setClaimTxRecords(prev => [...prev, { txHash }])
+      }
+    } catch (err) {
+      setLoading(false);
+      console.error(err);
     }
-    const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, railgunWalletID, railgunWalletMnemonic);
-    console.log('railgunWalletInfo :', railgunWalletInfo);
-
-    if (receiveAsset === 'USDC') {
-      console.log('using privateClaimSwap');
-      const txHash = await privateClaimSwap(
-        railgunWalletInfo,
-        encryptionKey,
-        claimPeanutLink || "https://peanut.to/claim#?c=5&v=v4&i=3555&p=kvVyr6ntko291LTL&t=ui"
-      )
-      setClaimTxRecords(prev => [...prev, { txHash }])
-    } else if (receiveAsset === 'WETH') {
-      console.log('using privateClaim');
-      const txHash = await privateClaim(
-        railgunWalletInfo,
-        encryptionKey,
-        claimPeanutLink || "https://peanut.to/claim#?c=5&v=v4&i=3555&p=kvVyr6ntko291LTL&t=ui"
-      )
-      setClaimTxRecords(prev => [...prev, { txHash }])
-    }
-
-    setLoading(false);
-
   }
 
   return (
@@ -154,7 +161,7 @@ const MainPage = () => {
         </TabList>
 
         <TabPanels>
-        <TabPanel >
+          <TabPanel >
             <Box p={4} mb={4} borderRadius="md" boxShadow="md" pos="relative">
               <Box mb={4}>
                 <label>1. asset</label>
