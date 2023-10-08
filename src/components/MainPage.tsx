@@ -1,6 +1,9 @@
 // TransferTabs.tsx
 
-import { Select, Spinner, Card, CardBody, Box, Tabs, TabList, Tab, TabPanels, TabPanel, Input, Flex, Button, Textarea, Text } from "@chakra-ui/react";
+import {
+  Tag, Select, Spinner, Card, CardBody, Box, Tabs, TabList, Tab, TabPanels, TabPanel,
+  Input, Flex, Button, StatNumber, Stat, StatHelpText, StatLabel, Text
+} from "@chakra-ui/react";
 import { useContext, useState, useEffect } from 'react'
 import getRailgunWallet from 'src/utils/getRailgunWallet';
 import UserCredentialContext from 'src/context/userCredential';
@@ -8,12 +11,15 @@ import { privateTransfer } from 'src/scripts/private-transfer';
 import { privateClaim } from 'src/scripts/claim';
 import { privateClaimSwap } from 'src/scripts/claim-swap';
 import { TOKEN_ADDRESSES } from 'src/constants';
-import { set } from 'lodash';
 
-import {getPrivateBalance} from "src/scripts/utils/balance"
-import {quoteWETHtoUSDC} from "src/scripts/utils/quote"
-import {getPeanutTokenAmountFromLink} from "src/scripts/utils/peanut"
+import { getPrivateBalance } from "src/scripts/utils/balance"
+import { quoteWETHtoUSDC } from "src/scripts/utils/quote"
+import { getPeanutTokenAmountFromLink } from "src/scripts/utils/peanut"
 import { ZeroAddress } from "ethers";
+
+function shorterHash(hash: string) {
+  return hash.slice(0, 6) + "..." + hash.slice(hash.length - 4, hash.length)
+}
 
 const MainPage = () => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +28,7 @@ const MainPage = () => {
   const [transferTokenAddress, setTransferTokenAddress] = useState(TOKEN_ADDRESSES.WETH);
   const [transferTxRecords, setTransferTxRecords] = useState<{ txHash, peanutLink }[]>([]);
   //logic for claiming
-  
+
   // balances
   const [WETHBalance, setWETHBalance] = useState(0);
   const [USDCBalance, setUSDCBalance] = useState(0);
@@ -33,7 +39,7 @@ const MainPage = () => {
 
   const [receiveAsset, setReceiveAsset] = useState('USDC'); // ['WETH', 'USDC']
   const [receiveAssetQuote, setReceiveAssetQuote] = useState(0)
-  console.log('receiveAsset :', receiveAsset);
+
   const [claimTxRecords, setClaimTxRecords] = useState<{ txHash }[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>(''); // ['error1', 'error2']
   const { logout, password, railgunWalletID } = useContext(UserCredentialContext);
@@ -42,7 +48,8 @@ const MainPage = () => {
     const timeOutId = setTimeout(async () => {
       if (claimPeanutLink !== "") {
         let res = await getPeanutTokenAmountFromLink(claimPeanutLink);
-        const address = res[0] == ZeroAddress ? "ETH" : res[0];
+        console.log('peanut res :', res);
+        const address = res[0] === ZeroAddress ? "ETH" : res[0];
         setClaimTokenAddr(address);
         setClaimAmount(Number(res[1]));
       }
@@ -64,8 +71,8 @@ const MainPage = () => {
   useEffect(() => {
     const timeOutId = setTimeout(async () => {
       const { railgunWalletInfo } = await getRailgunWallet(password, railgunWalletID);
-        setWETHBalance(Number(await getPrivateBalance(railgunWalletInfo, TOKEN_ADDRESSES.WETH)));
-        setUSDCBalance(Number(await getPrivateBalance(railgunWalletInfo, TOKEN_ADDRESSES.USDC)));
+      setWETHBalance(Number(await getPrivateBalance(railgunWalletInfo, TOKEN_ADDRESSES.WETH)));
+      setUSDCBalance(Number(await getPrivateBalance(railgunWalletInfo, TOKEN_ADDRESSES.USDC)));
     }, 300);
     return () => clearTimeout(timeOutId);
   }, [password, railgunWalletID]);
@@ -122,10 +129,27 @@ const MainPage = () => {
 
   return (
     <Box>
+      <Card mb="20px" p="16px">
+        <Box mb="12px">
+          <Text fontSize={20} mr="12px" mb="4px">
+            Railgun Wallet ID
+          </Text>
+          <Box>{shorterHash(railgunWalletID)}</Box>
+        </Box>
+        <Box mb={2} fontSize={20}>Private Balance</Box>
+        <Stat>
+          <StatLabel>WETH</StatLabel>
+          <StatNumber> {WETHBalance / 1e18}</StatNumber>
+        </Stat>
+        <Stat>
+          <StatLabel>USDC</StatLabel>
+          <StatNumber> {USDCBalance / 1e12}</StatNumber>
+        </Stat>
+      </Card>
       <Tabs variant="enclosed">
         <TabList>
           <Tab w="50%">Private Claim</Tab>
-          <Tab w="50%">Private Transfer</Tab> 
+          <Tab w="50%">Private Transfer</Tab>
         </TabList>
 
         <TabPanels>
@@ -139,14 +163,19 @@ const MainPage = () => {
                 <label>1. Peanut Link</label>
                 <Input placeholder="https://peanut..." onChange={(e) => setClaimPeanutLink(e.target.value)} />
               </Box>
-              { claimPeanutLink !== "" &&
-              <Text ml={4}  > 
-                - Claim Token: {claimTokenAddr}
-              </Text>}
-              { claimPeanutLink !== "" &&
-              <Text ml={4} mb={3}  > 
-                - Claim Amount:  {claimAmount/1e18}
-              </Text>}
+              {claimPeanutLink !== "" &&
+                <Box>
+                  <Tag ml="4px" mb="4px" variant='outline'>
+                    Claim Token: {claimTokenAddr}
+                  </Tag>
+                </Box>
+              }
+              {claimPeanutLink !== "" &&
+                <Box>
+                  <Tag ml="4px" mb={3} variant='outline'>
+                    Claim Amount:  {claimAmount / 1e18}
+                  </Tag>
+                </Box>}
               <Box mb={3}>
                 <label>2. Receive Asset</label>
                 <Select placeholder='Select Asset' onChange={(e) => setReceiveAsset(e.target.value)}>
@@ -154,25 +183,20 @@ const MainPage = () => {
                   <option value='WETH'> WETH (0xB4FBF2....2b2208d6)</option>
                 </Select>
               </Box>
-              { receiveAsset === 'USDC' && claimAmount !== 0 &&
-              <Text ml={4} mb={5}  > 
-                - Quote:  {receiveAssetQuote} USDC
-              </Text>}
+              {receiveAsset === 'USDC' && claimAmount !== 0 &&
+                <Box>
+                  <Tag ml="4px" mb={5} variant='outline'>
+                    Quote:  {receiveAssetQuote} USDC
+                  </Tag>
+                </Box>
+              }
               <Button onClick={onPrivateClaim} >Confirm</Button>
               {loading && <Flex minH={200} justifyContent="center" alignItems="center"
                 pos="absolute" left="0" top="0" right="0" bottom="0" background="white" opacity={0.8}>
                 <Spinner />
               </Flex>}
             </Box>
-            <Box>
-            <Box mb={2} fontSize={20}>Private Balance</Box>
-            <Text ml={4}  > 
-                - WETH: {WETHBalance/1e18}
-              </Text>
-              <Text ml={4} mb={3}  > 
-                - USDC: {USDCBalance/1e12}
-              </Text>
-            </Box>
+
             <Box>
               <Box mb={4} fontSize={20}>Claim History</Box>
               {
@@ -209,15 +233,6 @@ const MainPage = () => {
                 pos="absolute" left="0" top="0" right="0" bottom="0" background="white" opacity={0.8}>
                 <Spinner />
               </Flex>}
-            </Box>
-            <Box>
-            <Box mb={2} fontSize={20}>Private Balance</Box>
-            <Text ml={4}  > 
-                - WETH: {WETHBalance/1e18}
-              </Text>
-              <Text ml={4} mb={3}  > 
-                - USDC: {USDCBalance/1e12}
-              </Text>
             </Box>
             <Box>
               <Box mb={4} fontSize={20}>Transfer History</Box>
