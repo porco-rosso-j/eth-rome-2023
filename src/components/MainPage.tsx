@@ -43,7 +43,7 @@ const MainPage = () => {
 
   const [claimTxRecords, setClaimTxRecords] = useState<{ txHash }[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>(''); // ['error1', 'error2']
-  const { logout, password, railgunWalletID, railgunWalletMnemonic } = useContext(UserCredentialContext);
+  const { logout, password, railgunWalletID, railgunWalletMnemonic, saveRailgunWalletID } = useContext(UserCredentialContext);
 
   useEffect(() => {
     const timeOutId = setTimeout(async () => {
@@ -72,11 +72,13 @@ const MainPage = () => {
   useEffect(() => {
     const timeOutId = setTimeout(async () => {
       const { railgunWalletInfo } = await getRailgunWallet(password, railgunWalletID, railgunWalletMnemonic);
+      saveRailgunWalletID(railgunWalletInfo.id)
+
       setWETHBalance(Number(await getPrivateBalance(railgunWalletInfo, TOKEN_ADDRESSES.WETH)));
       setUSDCBalance(Number(await getPrivateBalance(railgunWalletInfo, TOKEN_ADDRESSES.USDC)));
     }, 300);
     return () => clearTimeout(timeOutId);
-  }, [password, railgunWalletID]);
+  }, [password, railgunWalletID, railgunWalletMnemonic, saveRailgunWalletID]);
 
   const onPrivateTransfer = async () => {
     setLoading(true);
@@ -143,7 +145,7 @@ const MainPage = () => {
           <Text fontSize={20} mr="12px" mb="4px">
             Railgun Wallet ID
           </Text>
-          <Box>{shorterHash(railgunWalletID)}</Box>
+          <Box>{railgunWalletID}</Box>
         </Box>}
         <Box mb={2} fontSize={20}>Private Balance</Box>
         <Stat>
