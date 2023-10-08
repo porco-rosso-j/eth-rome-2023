@@ -7,6 +7,7 @@ import UserCredentialContext from 'src/context/userCredential';
 import MainPage from 'src/components/MainPage';
 import initializeRailgunSystem from 'src/utils/initializeRailgunSystemRailgunSystem';
 import { useEffect } from 'react';
+import chakraDefaultTheme from 'src/theme'
 function App() {
   const {
     railgunWalletID,
@@ -24,7 +25,7 @@ function App() {
     init();
   }, [])
 
-  return <ChakraProvider>
+  return <ChakraProvider theme={chakraDefaultTheme}>
     <UserCredentialContext.Provider value={{
       railgunWalletID,
       password,
@@ -34,11 +35,15 @@ function App() {
     }}>
       <div>
         <Header />
-        {
-          (!railgunWalletID || !password) ? <WalletLogin /> : <Box p="16px">
-            <MainPage />
-          </Box>
-        }
+
+        <Box maxW='768px' mx="auto">
+          {
+            (!railgunWalletID || !password) ? <WalletLogin /> : <Box p="16px">
+              <MainPage />
+            </Box>
+          }
+        </Box>
+
 
       </div>
     </UserCredentialContext.Provider>

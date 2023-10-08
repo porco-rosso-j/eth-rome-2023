@@ -2,7 +2,7 @@
 
 import {
   Tag, Select, Spinner, Card, CardBody, Box, Tabs, TabList, Tab, TabPanels, TabPanel,
-  Input, Flex, Button, StatNumber, Stat, StatHelpText, StatLabel, Text
+  Input, Flex, Button, StatNumber, Stat, StatLabel, Text
 } from "@chakra-ui/react";
 import { useContext, useState, useEffect } from 'react'
 import getRailgunWallet from 'src/utils/getRailgunWallet';
@@ -129,7 +129,7 @@ const MainPage = () => {
 
   return (
     <Box>
-      <Card mb="20px" p="16px">
+      <Card mb="20px" p="16px" variant="darkCard">
         <Box mb="12px">
           <Text fontSize={20} mr="12px" mb="4px">
             Railgun Wallet ID
@@ -148,8 +148,8 @@ const MainPage = () => {
       </Card>
       <Tabs variant="enclosed">
         <TabList>
-          <Tab w="50%">Private Claim</Tab>
-          <Tab w="50%">Private Transfer</Tab>
+          <Tab w="50%" color="white">Private Claim</Tab>
+          <Tab w="50%" color="white">Private Transfer</Tab>
         </TabList>
 
         <TabPanels>
