@@ -5,10 +5,10 @@ import React, { useState } from "react";
 import { useContext } from 'react'
 import UserCredentialContext from 'src/context/userCredential';
 
-function isValidMnemonicFormat(input: string): boolean {
-  const words = input.trim().split(/\s+/);
-  return words.length === 12;
-}
+// function isValidrailgunWalletIDFormat(input: string): boolean {
+//   const words = input.trim().split(/\s+/);
+//   return words.length === 12;
+// }
 
 function obscureWords(input: string): string {
   const words = input.trim().split(/\s+/);
@@ -18,21 +18,21 @@ function obscureWords(input: string): string {
 
 const WalletLogin: React.FC = () => {
 
-  const { saveMnemonic, savePassword, mnemonic } = useContext(UserCredentialContext);
-  const [mnemonicInput, setMnemonicInput] = useState<string>('')
+  const { saveRailgunWalletID, savePassword, railgunWalletID } = useContext(UserCredentialContext);
+  const [railgunWalletIDInput, setrailgunWalletIDInput] = useState<string>('')
   const [passwordInput, setPasswordInput] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string>('')
 
 
   const onClickLogin = () => {
-    if (!mnemonic && mnemonicInput === '') {
-      setErrorMessage('Please input the seed phrase')
+    if (!railgunWalletID && railgunWalletIDInput === '') {
+      setErrorMessage('Please input the wallet id')
       return
     }
-    if (!mnemonic && !isValidMnemonicFormat(mnemonicInput)) {
-      setErrorMessage('Invalid seed phrase')
-      return
-    }
+    // if (!railgunWalletID && !isValidrailgunWalletIDFormat(railgunWalletIDInput)) {
+    //   setErrorMessage('Invalid seed phrase')
+    //   return
+    // }
     if (passwordInput === '') {
       setErrorMessage('Please input password')
       return
@@ -40,8 +40,8 @@ const WalletLogin: React.FC = () => {
 
     setErrorMessage('')
 
-    if (mnemonicInput) {
-      saveMnemonic(mnemonicInput)
+    if (railgunWalletIDInput) {
+      saveRailgunWalletID(railgunWalletIDInput)
     }
     if (passwordInput) {
       savePassword(passwordInput)
@@ -61,12 +61,11 @@ const WalletLogin: React.FC = () => {
       </Text>
 
       <Box mb={6}>
-        <Text mb={2}>1. Seed</Text>
+        <Text mb={2}>1. Railgun Wallet ID</Text>
         <Textarea
-          defaultValue={mnemonic ? obscureWords(mnemonic) : ''}
-          onChange={(e) => setMnemonicInput(e.target.value)}
-          placeholder="apple banana cherry dolphin elephant frog grape hill igloo jelly kite lemon
-" />
+          defaultValue={railgunWalletID ? obscureWords(railgunWalletID) : ''}
+          onChange={(e) => setrailgunWalletIDInput(e.target.value)}
+          placeholder="45094f71...f3gsf81840" />
       </Box>
 
       <Box mb={4}>

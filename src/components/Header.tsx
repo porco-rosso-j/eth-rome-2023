@@ -2,13 +2,13 @@ import { Flex, Box, Button } from '@chakra-ui/react'
 import { useContext } from 'react'
 import UserCredentialContext from 'src/context/userCredential';
 export default function Header() {
-  const { logout, password, mnemonic } = useContext(UserCredentialContext);
+  const { logout, password, railgunWalletID } = useContext(UserCredentialContext);
   return <Flex justifyContent="space-between" p="20px" boxShadow='sm' alignItems="center">
     <Box>
       GhostPay
     </Box>
     <Box>
-      {mnemonic && password && <Button onClick={logout}>
+      {railgunWalletID && password && <Button onClick={logout}>
         Log Out
       </Button>}
     </Box>

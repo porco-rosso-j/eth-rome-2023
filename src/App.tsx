@@ -9,9 +9,9 @@ import initializeRailgunSystem from 'src/utils/initializeRailgunSystemRailgunSys
 import { useEffect } from 'react';
 function App() {
   const {
-    mnemonic,
+    railgunWalletID,
     password,
-    saveMnemonic,
+    saveRailgunWalletID,
     savePassword,
     logout
   } = useUserCredential();
@@ -26,16 +26,16 @@ function App() {
 
   return <ChakraProvider>
     <UserCredentialContext.Provider value={{
-      mnemonic,
+      railgunWalletID,
       password,
-      saveMnemonic,
+      saveRailgunWalletID,
       savePassword,
       logout
     }}>
       <div>
         <Header />
         {
-          (!mnemonic || !password) ? <WalletLogin /> : <Box p="16px">
+          (!railgunWalletID || !password) ? <WalletLogin /> : <Box p="16px">
             <MainPage />
           </Box>
         }

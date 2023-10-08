@@ -36,7 +36,7 @@ const MainPage = () => {
   console.log('receiveAsset :', receiveAsset);
   const [claimTxRecords, setClaimTxRecords] = useState<{ txHash }[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>(''); // ['error1', 'error2']
-  const { logout, password, mnemonic } = useContext(UserCredentialContext);
+  const { logout, password, railgunWalletID } = useContext(UserCredentialContext);
 
   useEffect(() => {
     const timeOutId = setTimeout(async () => {
@@ -63,12 +63,12 @@ const MainPage = () => {
 
   useEffect(() => {
     const timeOutId = setTimeout(async () => {
-      const { railgunWalletInfo } = await getRailgunWallet(password, mnemonic);
+      const { railgunWalletInfo } = await getRailgunWallet(password, railgunWalletID);
         setWETHBalance(Number(await getPrivateBalance(railgunWalletInfo, TOKEN_ADDRESSES.WETH)));
         setUSDCBalance(Number(await getPrivateBalance(railgunWalletInfo, TOKEN_ADDRESSES.USDC)));
     }, 300);
     return () => clearTimeout(timeOutId);
-  }, [password, mnemonic]);
+  }, [password, railgunWalletID]);
 
   const onPrivateTransfer = async () => {
     setLoading(true);
@@ -77,7 +77,7 @@ const MainPage = () => {
       setErrorMessage('Please input amount');
       return;
     }
-    const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, mnemonic);
+    const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, railgunWalletID);
     console.log('railgunWalletInfo :', railgunWalletInfo);
     const transferResult = await privateTransfer(
       railgunWalletInfo,
@@ -95,7 +95,7 @@ const MainPage = () => {
     if (!claimPeanutLink) {
       setErrorMessage('Please input peanut link');
     }
-    const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, mnemonic);
+    const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, railgunWalletID);
     console.log('railgunWalletInfo :', railgunWalletInfo);
 
     if (receiveAsset === 'USDC') {

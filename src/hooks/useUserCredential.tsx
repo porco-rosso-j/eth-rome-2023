@@ -5,27 +5,27 @@ const useUserCredential = () => {
   const [password, setPassword] = useState<string | null>(
     localStorage.getItem(`${CREDENTIAL_PREFIX}_password`)
   );
-  const [mnemonic, setMnemonic] = useState<string | null>(
-    localStorage.getItem(`${CREDENTIAL_PREFIX}_mnemonic`)
+  const [railgunWalletID, setRailgunWalletID] = useState<string | null>(
+    localStorage.getItem(`${CREDENTIAL_PREFIX}_railgunWalletID`)
   );
 
   const savePassword = (password: string) => {
     setPassword(password);
   };
 
-  const saveMnemonic = (mnemonic: string) => {
-    localStorage.setItem(`${CREDENTIAL_PREFIX}_mnemonic`, mnemonic);
-    setMnemonic(mnemonic);
+  const saveRailgunWalletID = (railgunWalletID: string) => {
+    localStorage.setItem(`${CREDENTIAL_PREFIX}_railgunWalletID`, railgunWalletID);
+    setRailgunWalletID(railgunWalletID);
   };
 
   const logout = () => {
-    localStorage.removeItem(`${CREDENTIAL_PREFIX}_mnemonic`);
+    localStorage.removeItem(`${CREDENTIAL_PREFIX}_railgunWalletID`);
     setPassword(null);
-    setMnemonic(null);
+    setRailgunWalletID(null);
   };
 
 
-  return { password, mnemonic, savePassword, saveMnemonic, logout };
+  return { password, railgunWalletID, savePassword, saveRailgunWalletID, logout };
 };
 
 export default useUserCredential;
