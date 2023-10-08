@@ -148,11 +148,53 @@ const MainPage = () => {
       </Card>
       <Tabs variant="enclosed">
         <TabList>
-          <Tab w="50%" color="white">Private Claim</Tab>
           <Tab w="50%" color="white">Private Transfer</Tab>
+          <Tab w="50%" color="white">Private Claim</Tab>
         </TabList>
 
         <TabPanels>
+        <TabPanel >
+            <Box p={4} mb={4} borderRadius="md" boxShadow="md" pos="relative">
+              <Box mb={4}>
+                <label>1. asset</label>
+                <Input placeholder="0x123..." defaultValue={TOKEN_ADDRESSES.WETH} onChange={(e) => setTransferTokenAddress(e.target.value)} />
+              </Box>
+              <Box mb={4}>
+                <label>2. amount</label>
+                <Input placeholder="0.001" onChange={(e) => setTransferAmount(e.target.value)} />
+              </Box>
+              <Box >
+                {errorMessage}
+              </Box>
+              <Button onClick={onPrivateTransfer} w="100%" mt="16px">Confirm</Button>
+              {loading && <Flex minH={200} justifyContent="center" alignItems="center"
+                pos="absolute" left="0" top="0" right="0" bottom="0" background="white" opacity={0.5}>
+                <Spinner color='gray.800' />
+              </Flex>}
+            </Box>
+            <Box>
+              <Box mb={4} fontSize={20}>Transfer History</Box>
+              {
+                transferTxRecords.map((txRecord, index) => {
+                  return (
+                    <Card key={index} background="aliceblue" mb="4">
+                      <CardBody>
+                        <Box>
+                          <Box fontWeight={700}>Tx Hash</Box>
+                          {txRecord.txHash}
+                        </Box>
+                        <Box>
+                          <Box fontWeight={700}>Peanut Link</Box>
+                          {txRecord.peanutLink}
+                        </Box>
+                      </CardBody>
+                    </Card>
+                  )
+                })
+              }
+            </Box>
+
+          </TabPanel>
           <TabPanel>
             <Box mb={4} p={4} borderRadius="md" boxShadow="md">
               {/* <Box mb={4}>
@@ -214,48 +256,6 @@ const MainPage = () => {
                 })
               }
             </Box>
-          </TabPanel>
-          <TabPanel >
-            <Box p={4} mb={4} borderRadius="md" boxShadow="md" pos="relative">
-              <Box mb={4}>
-                <label>1. asset</label>
-                <Input placeholder="0x123..." defaultValue={TOKEN_ADDRESSES.WETH} onChange={(e) => setTransferTokenAddress(e.target.value)} />
-              </Box>
-              <Box mb={4}>
-                <label>2. amount</label>
-                <Input placeholder="0.001" onChange={(e) => setTransferAmount(e.target.value)} />
-              </Box>
-              <Box >
-                {errorMessage}
-              </Box>
-              <Button onClick={onPrivateTransfer} w="100%" mt="16px">Confirm</Button>
-              {loading && <Flex minH={200} justifyContent="center" alignItems="center"
-                pos="absolute" left="0" top="0" right="0" bottom="0" background="white" opacity={0.5}>
-                <Spinner color='gray.800' />
-              </Flex>}
-            </Box>
-            <Box>
-              <Box mb={4} fontSize={20}>Transfer History</Box>
-              {
-                transferTxRecords.map((txRecord, index) => {
-                  return (
-                    <Card key={index} background="aliceblue" mb="4">
-                      <CardBody>
-                        <Box>
-                          <Box fontWeight={700}>Tx Hash</Box>
-                          {txRecord.txHash}
-                        </Box>
-                        <Box>
-                          <Box fontWeight={700}>Peanut Link</Box>
-                          {txRecord.peanutLink}
-                        </Box>
-                      </CardBody>
-                    </Card>
-                  )
-                })
-              }
-            </Box>
-
           </TabPanel>
         </TabPanels>
       </Tabs>
