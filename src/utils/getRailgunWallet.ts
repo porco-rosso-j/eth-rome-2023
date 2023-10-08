@@ -17,13 +17,23 @@ import { setRailgunGas } from 'src/scripts/utils/gas';
 //   return { railgunWalletInfo, encryptionKey }
 // }
 
-export default async function getRailgunWallet(password: string, railgunWalletID: string) {
+export default async function getRailgunWallet(password: string, railgunWalletID: string, railgunWalletMnemonic: string) {
   const encryptionKey = await pbkdf2(password, "0x0", 1000000);
-  const railgunWalletInfo = await loadWalletByID(
-    encryptionKey,
-    railgunWalletID,
-    false, // creationBlockNumbers
-  )
+  let railgunWalletInfo;
+  if (railgunWalletID) {
+    railgunWalletInfo = await loadWalletByID(
+      encryptionKey,
+      railgunWalletID,
+      false, // creationBlockNumbers
+    )
+  } else if (railgunWalletMnemonic) {
+    railgunWalletInfo = await createRailgunWallet(
+      encryptionKey,
+      railgunWalletMnemonic,
+      undefined, // creationBlockNumbers
+    )
+  }
+
 
   await setRailgunGas();
   return { railgunWalletInfo, encryptionKey }

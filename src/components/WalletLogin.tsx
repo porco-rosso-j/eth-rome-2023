@@ -18,21 +18,28 @@ function obscureWords(input: string): string {
 
 const WalletLogin: React.FC = () => {
 
-  const { saveRailgunWalletID, savePassword, railgunWalletID } = useContext(UserCredentialContext);
-  const [railgunWalletIDInput, setrailgunWalletIDInput] = useState<string>('')
+  const { saveRailgunWalletID, saveRailgunWalletMnemonic, savePassword, railgunWalletID, railgunWalletMnemonic } = useContext(UserCredentialContext);
+  const [railgunWalletIDInput, setRailgunWalletIDInput] = useState<string>('')
+  const [railgunWalletMnemonicInput, setRailgunWalletMnemonicInput] = useState<string>('')
   const [passwordInput, setPasswordInput] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string>('')
 
 
   const onClickLogin = () => {
-    if (!railgunWalletID && railgunWalletIDInput === '') {
+
+    if (railgunWalletMnemonic && !railgunWalletID && railgunWalletIDInput === '') {
       setErrorMessage('Please input the wallet id')
+      return
+    }
+    if (!railgunWalletMnemonic && railgunWalletMnemonicInput === '') {
+      setErrorMessage('Please input the wallet mnemonic')
       return
     }
     // if (!railgunWalletID && !isValidrailgunWalletIDFormat(railgunWalletIDInput)) {
     //   setErrorMessage('Invalid seed phrase')
     //   return
     // }
+
     if (passwordInput === '') {
       setErrorMessage('Please input password')
       return
@@ -42,6 +49,9 @@ const WalletLogin: React.FC = () => {
 
     if (railgunWalletIDInput) {
       saveRailgunWalletID(railgunWalletIDInput)
+    }
+    if (railgunWalletMnemonicInput) {
+      saveRailgunWalletMnemonic(railgunWalletMnemonicInput)
     }
     if (passwordInput) {
       savePassword(passwordInput)
@@ -60,16 +70,23 @@ const WalletLogin: React.FC = () => {
         Login to your wallet
       </Text>
 
-      <Box mb={6}>
-        <Text mb={2}>1. Railgun Wallet ID</Text>
+      {railgunWalletMnemonic ? <Box mb={6}>
+        <Text mb={2}>Railgun Wallet ID</Text>
         <Textarea
           defaultValue={railgunWalletID ? obscureWords(railgunWalletID) : ''}
-          onChange={(e) => setrailgunWalletIDInput(e.target.value)}
+          onChange={(e) => setRailgunWalletIDInput(e.target.value)}
           placeholder="45094f71...f3gsf81840" />
-      </Box>
+      </Box> :
+        <Box mb={6}>
+          <Text >Railgun Wallet Mnemonic</Text>
+          <Text fontSize="12px" mb={2} color="gray.500">  You have to use mnemonic to login to the wallet at the first time.</Text>
+          <Textarea
+            onChange={(e) => setRailgunWalletMnemonicInput(e.target.value)}
+            placeholder="apple banana cherry dolphin elephant frog grape hill igloo jelly kite lemon" />
+        </Box>}
 
       <Box mb={4}>
-        <Text mb={2}>2. Password</Text>
+        <Text mb={2}>Password</Text>
 
         <Input type="password" onChange={(e) => setPasswordInput(e.target.value)} />
       </Box>

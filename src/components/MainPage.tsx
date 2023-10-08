@@ -18,6 +18,7 @@ import { getPeanutTokenAmountFromLink } from "src/scripts/utils/peanut"
 import { ZeroAddress } from "ethers";
 
 function shorterHash(hash: string) {
+  if (!hash) return
   return hash.slice(0, 6) + "..." + hash.slice(hash.length - 4, hash.length)
 }
 
@@ -42,7 +43,7 @@ const MainPage = () => {
 
   const [claimTxRecords, setClaimTxRecords] = useState<{ txHash }[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>(''); // ['error1', 'error2']
-  const { logout, password, railgunWalletID } = useContext(UserCredentialContext);
+  const { logout, password, railgunWalletID, railgunWalletMnemonic } = useContext(UserCredentialContext);
 
   useEffect(() => {
     const timeOutId = setTimeout(async () => {
@@ -70,7 +71,7 @@ const MainPage = () => {
 
   useEffect(() => {
     const timeOutId = setTimeout(async () => {
-      const { railgunWalletInfo } = await getRailgunWallet(password, railgunWalletID);
+      const { railgunWalletInfo } = await getRailgunWallet(password, railgunWalletID, railgunWalletMnemonic);
       setWETHBalance(Number(await getPrivateBalance(railgunWalletInfo, TOKEN_ADDRESSES.WETH)));
       setUSDCBalance(Number(await getPrivateBalance(railgunWalletInfo, TOKEN_ADDRESSES.USDC)));
     }, 300);
@@ -84,7 +85,7 @@ const MainPage = () => {
       setErrorMessage('Please input amount');
       return;
     }
-    const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, railgunWalletID);
+    const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, railgunWalletID, railgunWalletMnemonic);
     console.log('railgunWalletInfo :', railgunWalletInfo);
     const transferResult = await privateTransfer(
       railgunWalletInfo,
@@ -102,7 +103,7 @@ const MainPage = () => {
     if (!claimPeanutLink) {
       setErrorMessage('Please input peanut link');
     }
-    const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, railgunWalletID);
+    const { railgunWalletInfo, encryptionKey } = await getRailgunWallet(password, railgunWalletID, railgunWalletMnemonic);
     console.log('railgunWalletInfo :', railgunWalletInfo);
 
     if (receiveAsset === 'USDC') {
@@ -130,12 +131,12 @@ const MainPage = () => {
   return (
     <Box>
       <Card mb="20px" p="16px" variant="darkCard">
-        <Box mb="12px">
+        {railgunWalletID && <Box mb="12px">
           <Text fontSize={20} mr="12px" mb="4px">
             Railgun Wallet ID
           </Text>
           <Box>{shorterHash(railgunWalletID)}</Box>
-        </Box>
+        </Box>}
         <Box mb={2} fontSize={20}>Private Balance</Box>
         <Stat>
           <StatLabel>WETH</StatLabel>

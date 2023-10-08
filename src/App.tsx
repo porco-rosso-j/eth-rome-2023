@@ -11,10 +11,13 @@ import chakraDefaultTheme from 'src/theme'
 function App() {
   const {
     railgunWalletID,
+    railgunWalletMnemonic,
     password,
     saveRailgunWalletID,
+    saveRailgunWalletMnemonic,
     savePassword,
-    logout
+    logout,
+
   } = useUserCredential();
 
 
@@ -25,11 +28,26 @@ function App() {
     init();
   }, [])
 
+  const getShowLoginPage = () => {
+    console.log('password :', password);
+    if (!password) {
+      return true
+    }
+
+    if (!railgunWalletID && !railgunWalletMnemonic) {
+      return true
+    }
+
+    return false
+  }
+
   return <ChakraProvider theme={chakraDefaultTheme}>
     <UserCredentialContext.Provider value={{
       railgunWalletID,
+      railgunWalletMnemonic,
       password,
       saveRailgunWalletID,
+      saveRailgunWalletMnemonic,
       savePassword,
       logout
     }}>
@@ -38,7 +56,7 @@ function App() {
 
         <Box maxW='768px' mx="auto">
           {
-            (!railgunWalletID || !password) ? <WalletLogin /> : <Box p="16px">
+            getShowLoginPage() ? <WalletLogin /> : <Box p="16px">
               <MainPage />
             </Box>
           }

@@ -8,8 +8,8 @@ export default function Header() {
       GhostPay
     </Box>
     <Box>
-      {railgunWalletID && password && <Button onClick={logout}>
-        Log Out
+      {password && <Button onClick={logout}>
+        Remove Wallet
       </Button>}
     </Box>
 
