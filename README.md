@@ -30,4 +30,13 @@ Alice can claim ETH from the peanut link and directly shield it to her railgun w
 - [Peanut SDK](https://github.com/peanutprotocol/peanut-sdk/tree/main/src)
 
 ## Demo
-Check: [Demo video](https://youtu.be/yKbU_A3ZPVA).
+### Demo Video
+https://youtu.be/yKbU_A3ZPVA
+
+### Demo App:
+https://1ca0638722fa.ngrok.app/
+
+- seed phrase:
+deny ivory target dumb album valley knee broccoli dumb fiscal require process
+- password: 
+Qazwsx0812
