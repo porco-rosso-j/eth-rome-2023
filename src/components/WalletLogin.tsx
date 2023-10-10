@@ -1,14 +1,21 @@
 // WalletLogin.tsx
 
-import { Box, Input, Button, Text, Textarea } from "@chakra-ui/react";
+import { Box, Input, Button, Text, Textarea, Link } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useContext } from 'react'
 import UserCredentialContext from 'src/context/userCredential';
+import {BrowserProvider, Mnemonic} from "ethers"
 
 // function isValidrailgunWalletIDFormat(input: string): boolean {
 //   const words = input.trim().split(/\s+/);
 //   return words.length === 12;
 // }
+
+declare global {
+  interface Window {
+    ethereum: any
+  }
+}
 
 function obscureWords(input: string): string {
   const words = input.trim().split(/\s+/);
@@ -23,9 +30,13 @@ const WalletLogin: React.FC = () => {
   const [railgunWalletMnemonicInput, setRailgunWalletMnemonicInput] = useState<string>('')
   const [passwordInput, setPasswordInput] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string>('')
+  const [isMetamaskLogin, setIsMetamaskLogin] = useState<boolean>(false)
 
 
   const onClickLogin = () => {
+    if (isMetamaskLogin) {
+      onClickMetamaskLogin()
+    } else {
 
     if (railgunWalletMnemonic && !railgunWalletID && railgunWalletIDInput === '') {
       setErrorMessage('Please input the wallet id')
@@ -56,9 +67,42 @@ const WalletLogin: React.FC = () => {
     if (passwordInput) {
       savePassword(passwordInput)
     }
+    }
   }
+
+  const onClickMetamaskLogin = async () => {
+
+    const provider = new BrowserProvider(window.ethereum)
+    await provider.send("eth_requestAccounts", []);
+    const signer = await provider.getSigner();
+    console.log("Account:", await signer.getAddress());
+
+    const message = "sign this msg to create new ghsot pay wallet"
+    const entropy = (await signer.signMessage(message)).slice(0, 16);
+    console.log("entropy:", entropy);
+
+     const mnemonic = Mnemonic.fromEntropy(Buffer.from(entropy)).phrase.trim(); 
+    console.log("mnemonic:", mnemonic);
+
+    setRailgunWalletMnemonicInput(mnemonic)
+    saveRailgunWalletMnemonic(mnemonic)
+
+    setPasswordInput(entropy)
+    savePassword(entropy)
+
+  }
+
+  const useMMLogin = () => {
+    console.log("setIsMetamaskLogin")
+    if (isMetamaskLogin) {
+      setIsMetamaskLogin(false)
+    } else {
+      setIsMetamaskLogin(true)
+    }
+  }
+
   return (
-    <Box
+     <Box
       p={8}
       mx="auto"
       mt={20}
@@ -68,8 +112,9 @@ const WalletLogin: React.FC = () => {
       <Text fontSize="xl" fontWeight="bold" mb={6}>
         Login to your wallet
       </Text>
-
-      {railgunWalletMnemonic ? <Box mb={6}>
+      { !isMetamaskLogin ? <Box>
+      <Box>
+        {railgunWalletMnemonic ? <Box mb={6}>
         <Text mb={2}>Railgun Wallet ID</Text>
         <Textarea
           defaultValue={railgunWalletID ? obscureWords(railgunWalletID) : ''}
@@ -82,18 +127,23 @@ const WalletLogin: React.FC = () => {
           <Textarea
             onChange={(e) => setRailgunWalletMnemonicInput(e.target.value)}
             placeholder="apple banana cherry dolphin elephant frog grape hill igloo jelly kite lemon" />
-        </Box>}
+        </Box>} 
+      </Box> 
 
       <Box mb={4}>
         <Text mb={2}>Password</Text>
-
         <Input type="password" onChange={(e) => setPasswordInput(e.target.value)} />
       </Box>
       <Text color="red.500" mb={4}>{errorMessage}</Text>
-      <Button colorScheme="teal" w="100%" onClick={onClickLogin}>
-        Login
+      </Box> : null}
+      <Button colorScheme="teal" w="100%" onClick={onClickLogin} >
+        {isMetamaskLogin ? `Sign message to login` : `Import Railgun Wallet` }
       </Button>
-    </Box>
+      <Button fontSize={16} mt={2} w="100%" colorScheme='teal' variant='ghost' onClick={useMMLogin} >
+        {isMetamaskLogin ? `Import your railgun wallet` : `Or use Metamask to Login` }
+      </Button> 
+      
+       </Box>
   );
 };
 
