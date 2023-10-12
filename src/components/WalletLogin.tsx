@@ -60,7 +60,6 @@ const WalletLogin: React.FC = () => {
   return (
     <Box
       p={8}
-      w={["90%", "80%", "60%", "40%"]}
       mx="auto"
       mt={20}
       borderRadius="lg"
