@@ -34,8 +34,9 @@ Alice can claim ETH from the peanut link and directly shield it to her railgun w
 https://youtu.be/yKbU_A3ZPVA
 
 ### Demo App:
-https://1ca0638722fa.ngrok.app/
+[ghost-pay-alpha.vercel.app](ghost-pay-alpha.vercel.app)
 
+You can create an account with Metamask signing or use the following seed and password.  
 - seed phrase:
 deny ivory target dumb album valley knee broccoli dumb fiscal require process
 - password: 
