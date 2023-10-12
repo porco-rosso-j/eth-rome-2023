@@ -69,6 +69,7 @@
     },
     "devDependencies": {
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+        "esbuild-loader": "^4.0.2",
         "react-app-rewired": "^2.2.1"
     }
 }
