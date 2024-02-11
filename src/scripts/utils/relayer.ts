@@ -93,29 +93,11 @@ export async function getRelayer(tokenAddress: string) {
 	console.log("started: ", WakuRelayerClient.getContentTopics());
 
 	// WakuRelayerClient.setAddressFilters([gpRelayerAddr], []);
-	console.log(
-		"findAllRelayersForChain: ",
-		await WakuRelayerClient.findAllRelayersForChain(Goerli, true)
-	);
-
-	console.log(
-		"findRandomRelayerForToken: ",
-		await WakuRelayerClient.findRandomRelayerForToken(
-			Goerli,
-			tokenAddress,
-			true
-		)
-	);
-
-	console.log(
-		"findRelayersForToken: ",
-		await WakuRelayerClient.findRelayersForToken(Goerli, tokenAddress, true)
-	);
 
 	console.log("currentChain: ", currentChain);
 	console.log("currentStatus: ", currentStatus);
 
-	// åawait WakuRelayerClient.setChain(Goerli);
+	// await WakuRelayerClient.setChain(Goerli);
 	// console.log(
 	// 	"await WakuRelayerClient.tryReconnect();: ",
 	// 	await WakuRelayerClient.tryReconnect()
@@ -128,6 +110,25 @@ export async function getRelayer(tokenAddress: string) {
 		20,
 		100000 / 20 // 20 sec.
 	);
+
+	// console.log(
+	// 	"findAllRelayersForChain: ",
+	// 	await WakuRelayerClient.findAllRelayersForChain(Goerli, true)
+	// );
+
+	// console.log(
+	// 	"findRandomRelayerForToken: ",
+	// 	await WakuRelayerClient.findRandomRelayerForToken(
+	// 		Goerli,
+	// 		tokenAddress,
+	// 		true
+	// 	)
+	// );
+
+	// console.log(
+	// 	"findRelayersForToken: ",
+	// 	await WakuRelayerClient.findRelayersForToken(Goerli, tokenAddress, true)
+	// );
 
 	// console.log("3");
 	// console.log("status: ", currentStatus);
@@ -142,10 +143,9 @@ export async function getRelayer(tokenAddress: string) {
 	// Submit transaction to RPC.
 	// await relaySwap(transaction);
 	// Get relayer with lowest fee for a given ERC20 token.
-	// const selectedRelayer: Optional<SelectedRelayer> =
-	// 	await WakuRelayerClient.findBestRelayer(Goerli, tokenAddress, true);
+	const selectedRelayer: Optional<SelectedRelayer> =
+		await WakuRelayerClient.findBestRelayer(Goerli, tokenAddress, true);
 
-	let selectedRelayer;
 	console.log("selectedRelayer: ", selectedRelayer);
 	console.log("5");
 
@@ -158,19 +158,19 @@ export async function sendTxRailgunRelayer(
 ): Promise<string> {
 	const nullifeirs: string[] = ["0x012345"];
 
-	let currentChain: Chain;
-	let currentStatus: RelayerConnectionStatus;
-	const statusCallback = (chain: Chain, status: RelayerConnectionStatus) => {
-		currentChain = chain;
-		currentStatus = status;
-	};
+	// let currentChain: Chain;
+	// let currentStatus: RelayerConnectionStatus;
+	// const statusCallback = (chain: Chain, status: RelayerConnectionStatus) => {
+	// 	currentChain = chain;
+	// 	currentStatus = status;
+	// };
 
-	await WakuRelayerClient.start(
-		Goerli,
-		relayerOptions,
-		statusCallback,
-		relayerDebugger
-	);
+	// await WakuRelayerClient.start(
+	// 	Goerli,
+	// 	relayerOptions,
+	// 	statusCallback,
+	// 	relayerDebugger
+	// );
 
 	// Create Relayed transaction and send through selected Relayer.
 	const relayerTransaction: RelayerTransaction =
@@ -178,10 +178,10 @@ export async function sendTxRailgunRelayer(
 			TXIDVersion.V2_PoseidonMerkle,
 			tx.to,
 			tx.data,
-			// selectedRelayer?.railgunAddress as string,
-			// selectedRelayer?.tokenFee.feesID as string,
-			gpRelayerAddr,
-			gpRelayerFeesID,
+			selectedRelayer?.railgunAddress as string,
+			selectedRelayer?.tokenFee.feesID as string,
+			// gpRelayerAddr,
+			// gpRelayerFeesID,
 			Goerli,
 			nullifeirs,
 			BigInt("0x10000"),
@@ -199,5 +199,4 @@ export async function sendTxRailgunRelayer(
 	await WakuRelayerClient.stop();
 
 	return txHash;
-	return "";
 }
