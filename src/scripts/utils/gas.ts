@@ -13,10 +13,12 @@ import { setRailgunFees } from "@railgun-community/cookbook";
 import { ContractTransaction } from "ethers";
 
 const originalGasDetails: TransactionGasDetails = {
-	evmGasType: EVMGasType.Type2, // Depends on the chain (BNB uses type 0)
-	gasEstimate: 0n, // Always 0, we don't have this yet.
-	maxFeePerGas: BigInt("0x100000"), // Current gas Max Fee
-	maxPriorityFeePerGas: BigInt("0x010000"), // Current gas Max Priority Fee
+	// evmGasType: EVMGasType.Type2, // Depends on the chain (BNB uses type 0)
+	evmGasType: EVMGasType.Type1, // Depends on the chain (BNB uses type 0)
+	gasEstimate: 1000000n, // Always 0, we don't have this yet.
+	gasPrice: 10n,
+	//maxFeePerGas: BigInt("0x100000"), // Current gas Max Fee
+	//maxPriorityFeePerGas: BigInt("0x010000"), // Current gas Max Priority Fee
 };
 
 const feeTokenDetailsWETH: FeeTokenDetails = {
@@ -59,19 +61,19 @@ export async function getGasDetailsERC20(
 	);
 
 	// for railgun relayer
-	//   const gasDetails: TransactionGasDetails = {
-	//     evmGasType: EVMGasType.Type1, // Depends on the chain (BNB uses type 0)
-	//     gasEstimate: gasEstimate, // Output from gasEstimateForDeposit
-	//     gasPrice: BigInt('0x10000')
-	//   }
-
-	// for EOA relayer
 	const gasDetails: TransactionGasDetails = {
-		evmGasType: EVMGasType.Type2, // Depends on the chain (BNB uses type 0)
+		evmGasType: EVMGasType.Type1, // Depends on the chain (BNB uses type 0)
 		gasEstimate: gasEstimate, // Output from gasEstimateForDeposit
-		maxFeePerGas: BigInt("0x100000"), // Current gas Max Fee
-		maxPriorityFeePerGas: BigInt("0x010000"), // Current gas Max Priority Fee
+		gasPrice: BigInt("0x10000"),
 	};
+
+	// // for EOA relayer
+	// const gasDetails: TransactionGasDetails = {
+	// 	evmGasType: EVMGasType.Type2, // Depends on the chain (BNB uses type 0)
+	// 	gasEstimate: gasEstimate, // Output from gasEstimateForDeposit
+	// 	maxFeePerGas: BigInt("0x100000"), // Current gas Max Fee
+	// 	maxPriorityFeePerGas: BigInt("0x010000"), // Current gas Max Priority Fee
+	// };
 
 	return gasDetails;
 }

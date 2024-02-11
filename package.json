@@ -8,7 +8,7 @@
         "@emotion/styled": "^11.11.0",
         "@railgun-community/cookbook": "2.6.0",
         "@railgun-community/shared-models": "6.3.0",
-        "@railgun-community/waku-relayer-client-web": "5.0.0",
+        "@railgun-community/waku-relayer-client-web": "6.0.3",
         "@railgun-community/wallet": "6.4.8",
         "@squirrel-labs/peanut-sdk": "0.3.34",
         "@testing-library/jest-dom": "^5.17.0",
@@ -31,7 +31,9 @@
         "leveldown": "^6.1.1",
         "localforage": "^1.10.0",
         "os-browserify": "^0.3.0",
+        "patch-package": "^8.0.0",
         "path-browserify": "^1.0.1",
+        "postinstall-postinstall": "^2.1.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-scripts": "5.0.1",
@@ -49,7 +51,8 @@
         "build": "react-app-rewired build",
         "test": "react-app-rewired test",
         "eject": "react-app-rewired eject",
-        "serve": "serve ./build"
+        "serve": "serve ./build",
+        "postinstall": "patch-package"
     },
     "eslintConfig": {
         "extends": [

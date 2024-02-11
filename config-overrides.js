@@ -14,6 +14,8 @@ module.exports = {
 			url: require.resolve("url/"),
 			os: require.resolve("os-browserify"),
 			crypto: require.resolve("crypto-browserify"),
+			"default-gateway": false,
+			"@achingbrain/nat-port-mapper": false,
 		};
 
 		config.plugins = (config.plugins || []).concat([
@@ -27,6 +29,8 @@ module.exports = {
 			...config.resolve,
 			alias: {
 				...config.resolve.alias,
+				"default-gateway": false,
+				"@achingbrain/nat-port-mapper": false,
 			},
 		};
 

@@ -1,71 +1,73 @@
-import WalletLogin from 'src/components/WalletLogin'
-import React from 'react'
-import Header from 'src/components/Header'
+import WalletLogin from "src/components/WalletLogin";
+import React from "react";
+import Header from "./components/Header";
 import { ChakraProvider, Box } from "@chakra-ui/react";
-import useUserCredential from 'src/hooks/useUserCredential';
-import UserCredentialContext from 'src/context/userCredential';
-import MainPage from 'src/components/MainPage';
-import initializeRailgunSystem from 'src/utils/initializeRailgunSystemRailgunSystem';
-import { useEffect } from 'react';
-import chakraDefaultTheme from 'src/theme'
+import useUserCredential from "./hooks/useUserCredential";
+import UserCredentialContext from "./context/userCredential";
+import MainPage from "./components/MainPage";
+import initializeRailgunSystem from "./utils/initializeRailgunSystemRailgunSystem";
+import { useEffect } from "react";
+import chakraDefaultTheme from "./theme";
 function App() {
-  const {
-    railgunWalletID,
-    railgunWalletMnemonic,
-    password,
-    saveRailgunWalletID,
-    saveRailgunWalletMnemonic,
-    savePassword,
-    logout,
+	const {
+		railgunWalletID,
+		railgunWalletMnemonic,
+		password,
+		saveRailgunWalletID,
+		saveRailgunWalletMnemonic,
+		savePassword,
+		logout,
+	} = useUserCredential();
 
-  } = useUserCredential();
+	useEffect(() => {
+		async function init() {
+			await initializeRailgunSystem();
+		}
+		init();
+	}, []);
 
+	const getShowLoginPage = () => {
+		console.log("password :", password);
+		if (!password) {
+			return true;
+		}
 
-  useEffect(() => {
-    async function init() {
-      await initializeRailgunSystem()
-    }
-    init();
-  }, [])
+		if (!railgunWalletID && !railgunWalletMnemonic) {
+			return true;
+		}
 
-  const getShowLoginPage = () => {
-    console.log('password :', password);
-    if (!password) {
-      return true
-    }
+		return false;
+	};
 
-    if (!railgunWalletID && !railgunWalletMnemonic) {
-      return true
-    }
+	return (
+		<ChakraProvider theme={chakraDefaultTheme}>
+			<UserCredentialContext.Provider
+				value={{
+					railgunWalletID,
+					railgunWalletMnemonic,
+					password,
+					saveRailgunWalletID,
+					saveRailgunWalletMnemonic,
+					savePassword,
+					logout,
+				}}
+			>
+				<div>
+					<Header />
 
-    return false
-  }
-
-  return <ChakraProvider theme={chakraDefaultTheme}>
-    <UserCredentialContext.Provider value={{
-      railgunWalletID,
-      railgunWalletMnemonic,
-      password,
-      saveRailgunWalletID,
-      saveRailgunWalletMnemonic,
-      savePassword,
-      logout
-    }}>
-      <div>
-        <Header />
-
-        <Box maxW='768px' mx="auto">
-          {
-            getShowLoginPage() ? <WalletLogin /> : <Box p="16px">
-              <MainPage />
-            </Box>
-          }
-        </Box>
-
-
-      </div>
-    </UserCredentialContext.Provider>
-  </ChakraProvider>
+					<Box maxW="768px" mx="auto">
+						{getShowLoginPage() ? (
+							<WalletLogin />
+						) : (
+							<Box p="16px">
+								<MainPage />
+							</Box>
+						)}
+					</Box>
+				</div>
+			</UserCredentialContext.Provider>
+		</ChakraProvider>
+	);
 }
 
-export default App
+export default App;

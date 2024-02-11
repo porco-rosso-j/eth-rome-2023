@@ -27,6 +27,7 @@ export async function getPrivateBalance(
 		true
 	);
 
+	console.log("tokenAddress: ", tokenAddress);
 	console.log("balance: ", balance);
 	return balance;
 }

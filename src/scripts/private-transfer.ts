@@ -22,7 +22,12 @@ import { RecipeERC20Amount, RecipeInput } from "@railgun-community/cookbook";
 import { PrivateTransferRecipe } from "./cookbook/recipes/private-transfer-recipe";
 import { getGasDetailsERC20, setRailgunGas } from "./utils/gas";
 import { getPeanutLink } from "./utils/peanut";
-import { getRelayer, sendTx, sendTxRailgunRelayer } from "./utils/relayer";
+import {
+	getRelayer,
+	gpRelayerAddr,
+	sendTx,
+	sendTxRailgunRelayer,
+} from "./utils/relayer";
 
 const peanutAddress = "0x891021b34fEDC18E36C015BFFAA64a2421738906";
 const chainGoerli = NETWORK_CONFIG.Ethereum_Goerli.chain;
@@ -37,6 +42,7 @@ export async function privateTransfer(
 	txHash: string;
 	peanutLink: string;
 }> {
+	console.log("encryptionKey: ", encryptionKey);
 	await setRailgunGas();
 
 	const railgunWallet = await fullWalletForID(railgunWalletInfo.id);
@@ -66,6 +72,7 @@ export async function privateTransfer(
 	const relayerFeeERC20AmountRecipient: RailgunERC20AmountRecipient = {
 		tokenAddress: tokenAddr,
 		recipientAddress: selectedRelayer?.railgunAddress as string,
+		// recipientAddress: gpRelayerAddr,
 		amount: feeERC20AmountRecipients[0].amount,
 	};
 
@@ -120,6 +127,7 @@ export async function privateTransfer(
 	console.log("transaction: ", transaction);
 
 	const txHash = await sendTxRailgunRelayer(transaction, selectedRelayer);
+	//const txHash = await sendTxRailgunRelayer(transaction);
 	//const txHash: string | undefined = await sendTx(transaction);
 	//await sendTx(transaction)
 
