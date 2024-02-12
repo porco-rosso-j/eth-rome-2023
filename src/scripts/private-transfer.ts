@@ -43,9 +43,9 @@ export async function privateTransfer(
 	peanutLink: string;
 }> {
 	console.log("encryptionKey: ", encryptionKey);
-	await setRailgunGas();
+	//await setRailgunGas();
 
-	const railgunWallet = await fullWalletForID(railgunWalletInfo.id);
+	const railgunWallet = fullWalletForID(railgunWalletInfo.id);
 	const railgunAddress = railgunWalletInfo.railgunAddress;
 
 	// Inputs that will be unshielded from private balance.

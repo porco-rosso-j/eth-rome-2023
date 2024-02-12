@@ -48,8 +48,15 @@ module.exports = {
 					options: {
 						tsconfig: "./tsconfig.json",
 						// JavaScript version to compile to
-						target: "es2020",
+						target: "esnext",
 					},
+					exclude: /node_modules/,
+				},
+				{
+					test: /\.js|ts$/,
+					use: ["source-map-loader"],
+					enforce: "pre",
+					exclude: /node_modules/, // Exclude node_modules
 				},
 			],
 		};
@@ -58,8 +65,9 @@ module.exports = {
 			...config.optimization,
 			minimizer: [
 				new EsbuildPlugin({
-					target: "es2020", // Syntax to compile,
+					target: "esnext", // Syntax to compile,
 					css: true,
+					exclude: /node_modules/,
 				}),
 			],
 		};

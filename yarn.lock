@@ -4462,15 +4462,16 @@
   resolved "https://registry.yarnpkg.com/@railgun-community/curve25519-scalarmult-wasm/-/curve25519-scalarmult-wasm-0.1.5.tgz#edb5e40a8f1fdb7f7e0de1d04e8badabe41cb2a8"
   integrity sha512-Cur8uM/IdNW3WzUwdPloDG1CF0rpSBDWq2yGXJMZ7IMeBGdc4Jj0h9tnNMFRZ35ZuCVVbZ3yClmqSa4PsbpdGQ==
 
-"@railgun-community/engine@6.2.20":
-  version "6.2.20"
-  resolved "https://registry.yarnpkg.com/@railgun-community/engine/-/engine-6.2.20.tgz#bb7c5a9cfb066de77e1861304c6dbbe6d8154580"
-  integrity sha512-LWuyJbW7knIKyZSMtl7l/HNcI8Kf8b0YsQtTfgdaUunvPF6N+u7Cu2Ek5eeLt36Yu93t5FkTdJMdc8tiUuzEQQ==
+"@railgun-community/engine@7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@railgun-community/engine/-/engine-7.0.2.tgz#3ee29d27f644e8512132414553a3f198e156713c"
+  integrity sha512-WR1cjZf/abNAJt6S7+kGKQvpuOEwBkTjjyMJgkk+WJN6vRc8uD+MXo5Q3GLhbbLytyu4DeBc76V1YvSKcEGz3Q==
   dependencies:
     "@noble/ciphers" "^0.4.0"
     "@noble/ed25519" "^1.7.1"
     "@noble/hashes" "^1.3.2"
     "@railgun-community/curve25519-scalarmult-wasm" "0.1.5"
+    "@railgun-community/poseidon-hash-wasm" "1.0.0"
     "@scure/base" "^1.1.1"
     abstract-leveldown "^7.2.0"
     bn.js "^5.2.1"
@@ -4485,25 +4486,35 @@
     levelup "^5.1.1"
     msgpack-lite "^0.1.26"
 
-"@railgun-community/shared-models@6.3.0", "@railgun-community/shared-models@6.3.x":
+"@railgun-community/poseidon-hash-wasm@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@railgun-community/poseidon-hash-wasm/-/poseidon-hash-wasm-1.0.0.tgz#5b3b77c832055b51b0865f5b5f569ff105dc5a08"
+  integrity sha512-X9qFW6kYKz85eTlzoJBgbv7HjT8+T93yXAVNLUu3wSv7PSoWFef6bS7HRTdWBSSVxFawLaTMtmhoC20T9Zzi5A==
+
+"@railgun-community/shared-models@6.3.1":
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/@railgun-community/shared-models/-/shared-models-6.3.1.tgz#a4e2a9606e1dcc205e13560f147c53e4c4f9b89a"
+  integrity sha512-/CVTlS79OF2bz7nonRw5fvmsBq5cfJ7v4QswSgPNw6IZflP6omHI+/hcxW90PIoQ40nfS2HaC2+wUgAkdv4Axw==
+
+"@railgun-community/shared-models@6.3.x":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@railgun-community/shared-models/-/shared-models-6.3.0.tgz#c3d87091b9afc880f369b30f63c7df6f0f47829b"
   integrity sha512-ZesDE7DnLUmjn+2M6UisXPUumImmqWHi854+7q3EkYV5R/Gjsth4yeca1OBNSjCmANpg7nZvDjctkodWFi0xBw==
 
-"@railgun-community/waku-relayer-client-web@6.0.3":
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/@railgun-community/waku-relayer-client-web/-/waku-relayer-client-web-6.0.3.tgz#c8cafeebf75c6cb4d33c6dea6232bf39d0529185"
-  integrity sha512-tFMlrG39jyQ5NtG5PAa0h3OYKo/k1hCbqbvec8eYQ6eQpi69DqLmJCJEvF0e8xaKG4HFW9o4H59S91wTiqrvxg==
+"@railgun-community/waku-relayer-client-web@^6.0.4":
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/@railgun-community/waku-relayer-client-web/-/waku-relayer-client-web-6.0.4.tgz#5a3309f904d3e9d46316b90d88d6c9ee4a794648"
+  integrity sha512-Ikedolv23cc7DFDSAgjU0VTT/Y2UOHZ4CTusu2RJ1mGNW36bb0tLU/ZZ97CsKbaZIT9DLqLI1cn838e2j5hbtQ==
   dependencies:
     "@libp2p/bootstrap" "^6.0.0"
     "@waku/core" "0.0.20"
     "@waku/create" "0.0.15"
     "@waku/relay" "0.0.3"
 
-"@railgun-community/wallet@6.4.8":
-  version "6.4.8"
-  resolved "https://registry.yarnpkg.com/@railgun-community/wallet/-/wallet-6.4.8.tgz#a342566187433128656ae57c5d60d1e06337e67b"
-  integrity sha512-XuoQrhImvrmuRCma958Tx5GjbEErOCWRI/mkivxFt+3I42oBfSlWAF/vZSUeut66R0tiCH7HjMDCxCUH/94Q2A==
+"@railgun-community/wallet@7.0.3":
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@railgun-community/wallet/-/wallet-7.0.3.tgz#11adf9d547899b40c9c9e3fe066e11a2c473f2cd"
+  integrity sha512-Cx8j3DkHzJafQSA2NAlCObIehwDPmiS70C3d/DeUtFzWu4xnKyu9Rx9kMRCp3v6dyy/qhhwliYOnsvh2WmcVpQ==
   dependencies:
     "@graphql-mesh/cache-localforage" "^0.7.20"
     "@graphql-mesh/cross-helpers" "^0.3.4"
@@ -4516,8 +4527,8 @@
     "@graphql-mesh/types" "^0.91.14"
     "@graphql-mesh/utils" "^0.43.22"
     "@noble/ed25519" "^1.7.1"
-    "@railgun-community/engine" "6.2.20"
-    "@railgun-community/shared-models" "6.3.0"
+    "@railgun-community/engine" "7.0.2"
+    "@railgun-community/shared-models" "6.3.1"
     "@whatwg-node/fetch" "^0.8.4"
     assert "2.0.0"
     axios "0.27.2"
@@ -5212,7 +5223,7 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.3.tgz#bbe64987e0eb05de150c305005055c7ad784a9ce"
   integrity sha512-Ys+/St+2VF4+xuY6+kDIXGxbNRO0mesVg0bbxEfB97Od1Vjpjx9KD1qxs64Gcb3CWPirk9Xe+PT4YiiHQ9T+eg==
 
-"@types/node@*", "@types/node@>=13.7.0":
+"@types/node@*", "@types/node@>=13.7.0", "@types/node@^20.4.2":
   version "20.11.17"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.17.tgz#cdd642d0e62ef3a861f88ddbc2b61e32578a9292"
   integrity sha512-QmgQZGWu1Yw9TDyAP9ZzpFJKynYNeOvwMJmaxABfieQoVoiVOS6MN1WSpqpRcbeA5+RW82kraAVxCCJg+780Qw==
@@ -5228,11 +5239,6 @@
   version "12.20.55"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.55.tgz#c329cbd434c42164f846b909bd6f85b5537f6240"
   integrity sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==
-
-"@types/node@^16.18.57":
-  version "16.18.57"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.57.tgz#1ba31c0e5c403aab90a3b7826576e6782ded779b"
-  integrity sha512-piPoDozdPaX1hNWFJQzzgWqE40gh986VvVx/QO9RU4qYRE55ld7iepDVgZ3ccGUw0R4wge0Oy1dd+3xOQNkkUQ==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -8254,11 +8260,6 @@ dotenv@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
-
-dotenv@^16.3.1:
-  version "16.3.1"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.3.1.tgz#369034de7d7e5b120972693352a3bf112172cc3e"
-  integrity sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==
 
 dset@3.1.2, dset@^3.1.1, dset@^3.1.2:
   version "3.1.2"
@@ -15902,10 +15903,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@^4.9.5:
-  version "4.9.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
-  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
+typescript@^5.1.6:
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.3.3.tgz#b3ce6ba258e72e6305ba66f5c9b452aaee3ffe37"
+  integrity sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==
 
 uint8-varint@^1.0.1, uint8-varint@^1.0.2, uint8-varint@^1.0.6:
   version "1.0.8"

@@ -1,6 +1,6 @@
 import LevelDOWN from "leveldown";
 import LevelDB from "level-js";
-import { artifactStore } from "./artifactStore";
+import { createArtifactStore } from "./artifactStore";
 import {
 	startRailgunEngine,
 	loadProvider,
@@ -15,7 +15,10 @@ import {
 	NetworkName,
 } from "@railgun-community/shared-models";
 import { Optional } from "./type";
-import { MOCK_FALLBACK_PROVIDER_JSON_CONFIG_GOERLI } from "./provider";
+import {
+	// MOCK_FALLBACK_PROVIDER_JSON_CONFIG_ETH,
+	MOCK_FALLBACK_PROVIDER_JSON_CONFIG_GOERLI,
+} from "./provider";
 
 /// constants/variables //
 const dbPath = "engine.db";
@@ -40,30 +43,41 @@ const setLogging = () => {
 	setLoggers(logMessage, logError);
 };
 
-export const initEngine = () => {
+export const initEngine = async () => {
 	// const shouldDebug = false;
-	startRailgunEngine(
-		"test", // walletSource
-		db,
-		true, //shouldDebug
-		artifactStore,
-		false, // UseNativeArtifacts
-		false,
-		["https://poi-node.terminal-wallet.com"],
-		undefined
-	);
 
+	await startEngine();
 	setLogging();
 
 	setOnBalanceUpdateCallback(MOCK_BALANCES_UPDATE_CALLBACK);
 	setOnUTXOMerkletreeScanCallback(merkletreeHistoryScanCallback);
 };
 
+export const startEngine = async () => {
+	// const shouldDebug = false;
+	startRailgunEngine(
+		"test", // walletSource
+		db,
+		true, //shouldDebug
+		// artifactStore,
+		createArtifactStore("local/dir"),
+		false, // UseNativeArtifacts
+		false,
+		["https://poi-node.terminal-wallet.com"],
+		undefined
+	);
+};
+
 export const initEngineNetwork = async () => {
 	// Don't wait for async. It will try to load historical events, which takes a while.
-	return loadProvider(
+	const ret = await loadProvider(
 		MOCK_FALLBACK_PROVIDER_JSON_CONFIG_GOERLI,
+		//MOCK_FALLBACK_PROVIDER_JSON_CONFIG_ETH,
 		NetworkName.EthereumGoerli,
+		//NetworkName.Ethereum,
 		10000 // pollingInterval
 	);
+	console.log("ret: ", ret);
+	console.log("feesSerialized: ", ret.feesSerialized);
+	return ret;
 };

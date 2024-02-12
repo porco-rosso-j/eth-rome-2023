@@ -1,12 +1,12 @@
 {
 	"compilerOptions": {
-		"target": "ES2022",
+		"target": "esnext",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
-		"strict": false,
+		"strict": true,
 		"forceConsistentCasingInFileNames": true,
 		"noFallthroughCasesInSwitch": true,
 		"module": "esnext",
@@ -15,8 +15,10 @@
 		"isolatedModules": false,
 		"noEmit": true,
 		"jsx": "react-jsx",
-		"baseUrl": "."
+		"baseUrl": ".",
+		"sourceMap": true,
+		"inlineSources": true
 	},
 	"include": ["src"],
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules", "build"]
 }

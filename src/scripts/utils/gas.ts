@@ -29,7 +29,7 @@ const feeTokenDetailsWETH: FeeTokenDetails = {
 
 export async function setRailgunGas() {
 	const shieldUnshieldfee = 25n; // must be 25n
-	await setRailgunFees(
+	setRailgunFees(
 		NetworkName.EthereumGoerli,
 		shieldUnshieldfee,
 		shieldUnshieldfee

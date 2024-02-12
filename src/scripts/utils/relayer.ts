@@ -26,7 +26,6 @@ const wallet = new Wallet(PRIVATE_KEY as string, provider);
 
 export const gpRelayerAddr =
 	"0zk1qy2qnq90y0dpmchvj6nz9ngcplqpgn05fz56y8sexpudr2ef33cslrv7j6fe3z53l79jgjxl92vjmvyz4429xcuny32y3s7a93x4gypq89tpxuv5dms6jsacv00";
-const gpRelayerFeesID = "ko8fupg111w2gqpw";
 
 export async function sendTx(transaction: any): Promise<string> {
 	const res = await wallet.sendTransaction(transaction);
@@ -38,6 +37,11 @@ export async function sendTx(transaction: any): Promise<string> {
 const Goerli: Chain = {
 	type: ChainType.EVM,
 	id: 5,
+};
+
+const Ethereum: Chain = {
+	type: ChainType.EVM,
+	id: 1,
 };
 
 type RelayerDebugger = {
@@ -58,21 +62,18 @@ const relayerDebugger: RelayerDebugger = {
 const pubSubTopic = "/waku/2/railgun-relayer";
 
 const relayerOptions: RelayerOptions = {
-	pubSubTopic,
-	additionalDirectPeers: [
-		"/ip4/167.235.62.116/tcp/60000/p2p/16Uiu2HAmAywKTLZ1bhkDYeudGUTdyd4ipwQH9pHWRG2btqbpbWcw",
-		"/ip4/167.235.62.116/tcp/8000/ws/p2p/16Uiu2HAmAywKTLZ1bhkDYeudGUTdyd4ipwQH9pHWRG2btqbpbWcw",
-	],
+	pubSubTopic: pubSubTopic,
+	// additionalDirectPeers: [
+	// 	"/ip4/167.235.62.116/tcp/60000/p2p/16Uiu2HAmAywKTLZ1bhkDYeudGUTdyd4ipwQH9pHWRG2btqbpbWcw",
+	// 	"/ip4/167.235.62.116/tcp/8000/ws/p2p/16Uiu2HAmAywKTLZ1bhkDYeudGUTdyd4ipwQH9pHWRG2btqbpbWcw",
+	// ],
+	peerDiscoveryTimeout: 60000,
 };
-
-// const relayerOptions = {
-// 	pubSubTopic,
-// };
-// let wakuClient: WakuRelayerClient;
 
 export async function getRelayer(tokenAddress: string) {
 	console.log("1");
 	console.log("tokenAddress: ", tokenAddress);
+	//tokenAddress = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
 
 	let currentChain: Chain;
 	let currentStatus: RelayerConnectionStatus;
@@ -81,8 +82,8 @@ export async function getRelayer(tokenAddress: string) {
 		currentStatus = status;
 	};
 
-	// wakuClient. = 500;
 	await WakuRelayerClient.start(
+		// Ethereum,
 		Goerli,
 		relayerOptions,
 		statusCallback,
@@ -94,8 +95,8 @@ export async function getRelayer(tokenAddress: string) {
 
 	// WakuRelayerClient.setAddressFilters([gpRelayerAddr], []);
 
-	console.log("currentChain: ", currentChain);
-	console.log("currentStatus: ", currentStatus);
+	console.log("currentChain: ", currentChain!);
+	console.log("currentStatus: ", currentStatus!);
 
 	// await WakuRelayerClient.setChain(Goerli);
 	// console.log(
@@ -111,28 +112,8 @@ export async function getRelayer(tokenAddress: string) {
 		100000 / 20 // 20 sec.
 	);
 
-	// console.log(
-	// 	"findAllRelayersForChain: ",
-	// 	await WakuRelayerClient.findAllRelayersForChain(Goerli, true)
-	// );
-
-	// console.log(
-	// 	"findRandomRelayerForToken: ",
-	// 	await WakuRelayerClient.findRandomRelayerForToken(
-	// 		Goerli,
-	// 		tokenAddress,
-	// 		true
-	// 	)
-	// );
-
-	// console.log(
-	// 	"findRelayersForToken: ",
-	// 	await WakuRelayerClient.findRelayersForToken(Goerli, tokenAddress, true)
-	// );
-
-	// console.log("3");
-	// console.log("status: ", currentStatus);
-	// console.log("statusInitialConnection: ", statusInitialConnection);
+	console.log("3");
+	console.log("statusInitialConnection: ", statusInitialConnection);
 
 	if (statusInitialConnection !== RelayerConnectionStatus.Connected) {
 		throw new Error("Could not establish initial connection with fees.");
@@ -140,8 +121,6 @@ export async function getRelayer(tokenAddress: string) {
 
 	console.log("4");
 
-	// Submit transaction to RPC.
-	// await relaySwap(transaction);
 	// Get relayer with lowest fee for a given ERC20 token.
 	const selectedRelayer: Optional<SelectedRelayer> =
 		await WakuRelayerClient.findBestRelayer(Goerli, tokenAddress, true);

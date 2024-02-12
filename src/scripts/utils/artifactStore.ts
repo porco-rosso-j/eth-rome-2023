@@ -1,6 +1,6 @@
-import {Buffer} from 'buffer';
-import { ArtifactStore } from '@railgun-community/wallet';
-import localforage from 'localforage';
+import { Buffer } from "buffer";
+import { ArtifactStore } from "@railgun-community/wallet";
+import localforage from "localforage";
 
 // export const createArtifactStore = (): ArtifactStore => {
 //   return new ArtifactStore(
@@ -16,16 +16,28 @@ import localforage from 'localforage';
 // export const artifactStore = createArtifactStore();
 
 // brower version
-const createArtifactStore = (): ArtifactStore => {
-  return new ArtifactStore(
-    async (path: string) => {
-      return localforage.getItem(path);
-    },
-    async (dir: string, path: string, item: string | Buffer) => {
-      await localforage.setItem(path, item);
-    },
-    async (path: string) => (await localforage.getItem(path)) != null,
-  );
-}
+// const createArtifactStore = (): ArtifactStore => {
+// 	return new ArtifactStore(
+// 		async (path: string) => {
+// 			return localforage.getItem(path);
+// 		},
+// 		async (_dir: string, path: string, item: string | Buffer) => {
+// 			await localforage.setItem(path, item);
+// 		},
+// 		async (path: string) => (await localforage.getItem(path)) != null
+// 	);
+// };
 
-export const artifactStore = createArtifactStore();
+export const createArtifactStore = (path: string): ArtifactStore => {
+	return new ArtifactStore(
+		async (path: string) => {
+			return localforage.getItem(path);
+		},
+		async (dir: string, path: string, item: string | Uint8Array) => {
+			await localforage.setItem(path, item);
+		},
+		async (path: string) => (await localforage.getItem(path)) != null
+	);
+};
+
+// export const artifactStore = createArtifactStore();
