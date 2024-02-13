@@ -13,6 +13,8 @@ import {
 	MerkletreeScanUpdateEvent,
 	MerkletreeScanStatus,
 	NetworkName,
+	POIList,
+	POIListType,
 } from "@railgun-community/shared-models";
 import { Optional } from "./type";
 import {
@@ -45,28 +47,47 @@ const setLogging = () => {
 
 export const initEngine = async () => {
 	// const shouldDebug = false;
+	const MOCK_LIST: POIList = {
+		key: "mock key",
+		type: POIListType.Gather,
+		name: "mock list",
+		description: "mock",
+	};
 
-	await startEngine();
+	// await startEngine();
+	await startRailgunEngine(
+		"test", // walletSource
+		db,
+		true, //shouldDebug
+		// artifactStore,
+		createArtifactStore("local/dir"),
+		//createArtifactStore(),
+		false, // UseNativeArtifacts
+		false,
+		["https://poi-node.terminal-wallet.com"],
+		[MOCK_LIST],
+		true
+	);
 	setLogging();
 
 	setOnBalanceUpdateCallback(MOCK_BALANCES_UPDATE_CALLBACK);
 	setOnUTXOMerkletreeScanCallback(merkletreeHistoryScanCallback);
 };
 
-export const startEngine = async () => {
-	// const shouldDebug = false;
-	startRailgunEngine(
-		"test", // walletSource
-		db,
-		true, //shouldDebug
-		// artifactStore,
-		createArtifactStore("local/dir"),
-		false, // UseNativeArtifacts
-		false,
-		["https://poi-node.terminal-wallet.com"],
-		undefined
-	);
-};
+// export const startEngine = async () => {
+// 	// const shouldDebug = false;
+// 	startRailgunEngine(
+// 		"test", // walletSource
+// 		db,
+// 		true, //shouldDebug
+// 		// artifactStore,
+// 		createArtifactStore("local/dir"),
+// 		false, // UseNativeArtifacts
+// 		false,
+// 		["https://poi-node.terminal-wallet.com"],
+// 		undefined
+// 	);
+// };
 
 export const initEngineNetwork = async () => {
 	// Don't wait for async. It will try to load historical events, which takes a while.

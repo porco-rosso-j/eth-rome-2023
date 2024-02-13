@@ -14,12 +14,14 @@ export default async function getRailgunWallet(
 	console.log("encryptionKey !!: ", encryptionKey);
 	let railgunWalletInfo;
 	if (railgunWalletID) {
+		console.log("railgunWalletID 1: ");
 		railgunWalletInfo = await loadWalletByID(
 			encryptionKey,
 			railgunWalletID,
 			false // creationBlockNumbers
 		);
 	} else if (railgunWalletMnemonic) {
+		console.log("railgunWalletMnemonic 2: ");
 		railgunWalletInfo = await createRailgunWallet(
 			encryptionKey,
 			railgunWalletMnemonic,
@@ -27,6 +29,7 @@ export default async function getRailgunWallet(
 		);
 	}
 
+	console.log("railgunWalletInfo: ", railgunWalletInfo);
 	await setRailgunGas();
 	return { railgunWalletInfo, encryptionKey };
 }

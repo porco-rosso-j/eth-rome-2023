@@ -10,15 +10,15 @@ import {
 	TXIDVersion,
 } from "@railgun-community/shared-models";
 
-// const chainGoerli = NETWORK_CONFIG.Ethereum_Goerli.chain;
-const chainEthereum = NETWORK_CONFIG.Ethereum.chain;
+const chainGoerli = NETWORK_CONFIG.Ethereum_Goerli.chain;
+//const chainEthereum = NETWORK_CONFIG.Ethereum.chain;
 
 export async function getPrivateBalance(
 	railgunWalletInfo: RailgunWalletInfo,
 	tokenAddress: string
 ): Promise<bigint> {
-	const railgunWallet = await fullWalletForID(railgunWalletInfo.id);
-	await refreshBalances(chainEthereum, railgunWallet.id);
+	const railgunWallet = fullWalletForID(railgunWalletInfo.id);
+	await refreshBalances(chainGoerli, railgunWallet.id);
 
 	const balance = await balanceForERC20Token(
 		TXIDVersion.V2_PoseidonMerkle,

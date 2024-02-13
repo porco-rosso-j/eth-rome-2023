@@ -68,7 +68,7 @@ export async function privateTransfer(
 	console.log("crossContractCalls: ", crossContractCalls);
 
 	const selectedRelayer = await getRelayer(tokenAddr);
-	console.log("selectedRelayer p: ", selectedRelayer);
+
 	const relayerFeeERC20AmountRecipient: RailgunERC20AmountRecipient = {
 		tokenAddress: tokenAddr,
 		recipientAddress: selectedRelayer?.railgunAddress as string,
@@ -89,6 +89,8 @@ export async function privateTransfer(
 		[],
 		crossContractCalls
 	);
+
+	console.log("selectedRelayer: ", selectedRelayer);
 
 	await generateCrossContractCallsProof(
 		TXIDVersion.V2_PoseidonMerkle,

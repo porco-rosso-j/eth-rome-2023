@@ -17,7 +17,10 @@
 		"jsx": "react-jsx",
 		"baseUrl": ".",
 		"sourceMap": true,
-		"inlineSources": true
+		"inlineSources": true,
+		"paths": {
+			"src/*": ["./src/*"]
+		}
 	},
 	"include": ["src"],
 	"exclude": ["node_modules", "build"]

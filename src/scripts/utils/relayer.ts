@@ -18,20 +18,21 @@ import {
 // } from "@railgun-community/waku-relayer-client-web";
 import { Optional } from "./type";
 
-import { Wallet, providers } from "ethers5";
-const ALCHEMY_GOERLI = process.env.REACT_APP_ALCHEMY_GOERLI;
-const PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY;
-const provider = new providers.JsonRpcProvider(ALCHEMY_GOERLI);
-const wallet = new Wallet(PRIVATE_KEY as string, provider);
+// import { Wallet, providers } from "ethers5";
+// const ALCHEMY_GOERLI = process.env.REACT_APP_ALCHEMY_GOERLI;
+// const PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY;
+// const provider = new providers.JsonRpcProvider(ALCHEMY_GOERLI);
+// const wallet = new Wallet(PRIVATE_KEY as string, provider);
 
 export const gpRelayerAddr =
 	"0zk1qy2qnq90y0dpmchvj6nz9ngcplqpgn05fz56y8sexpudr2ef33cslrv7j6fe3z53l79jgjxl92vjmvyz4429xcuny32y3s7a93x4gypq89tpxuv5dms6jsacv00";
 
 export async function sendTx(transaction: any): Promise<string> {
-	const res = await wallet.sendTransaction(transaction);
-	console.log("res :", res?.hash);
-	await res?.wait();
-	return res?.hash;
+	// const res = await wallet.sendTransaction(transaction);
+	// console.log("res :", res?.hash);
+	// await res?.wait();
+	// return res?.hash;
+	return "";
 }
 
 const Goerli: Chain = {
@@ -63,10 +64,10 @@ const pubSubTopic = "/waku/2/railgun-relayer";
 
 const relayerOptions: RelayerOptions = {
 	pubSubTopic: pubSubTopic,
-	// additionalDirectPeers: [
-	// 	"/ip4/167.235.62.116/tcp/60000/p2p/16Uiu2HAmAywKTLZ1bhkDYeudGUTdyd4ipwQH9pHWRG2btqbpbWcw",
-	// 	"/ip4/167.235.62.116/tcp/8000/ws/p2p/16Uiu2HAmAywKTLZ1bhkDYeudGUTdyd4ipwQH9pHWRG2btqbpbWcw",
-	// ],
+	additionalDirectPeers: [
+		"/ip4/167.235.62.116/tcp/60000/p2p/16Uiu2HAmAywKTLZ1bhkDYeudGUTdyd4ipwQH9pHWRG2btqbpbWcw",
+		"/ip4/167.235.62.116/tcp/8000/ws/p2p/16Uiu2HAmAywKTLZ1bhkDYeudGUTdyd4ipwQH9pHWRG2btqbpbWcw",
+	],
 	peerDiscoveryTimeout: 60000,
 };
 
@@ -89,6 +90,7 @@ export async function getRelayer(tokenAddress: string) {
 		statusCallback,
 		relayerDebugger
 	);
+	WakuRelayerClient.setAddressFilters([gpRelayerAddr], []);
 
 	console.log("started: ", WakuRelayerClient.isStarted());
 	console.log("started: ", WakuRelayerClient.getContentTopics());
