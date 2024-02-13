@@ -3,8 +3,7 @@ import path from "path";
 import react from "@vitejs/plugin-react-swc";
 //import reactRefresh from "@vitejs/plugin-react-refresh"; // Assuming a React project; adjust accordingly.
 import { nodePolyfills } from "vite-plugin-node-polyfills";
-// Polyfill for Node.js built-ins and globals
-import copy from "rollup-plugin-copy";
+// Polyfill for Node.js built-ins and globals;
 import fs from "fs";
 
 function MockModulePlugin(): Plugin {
@@ -34,20 +33,11 @@ const wasmContentTypePlugin = {
 	},
 };
 
-const copied = copy({
-	targets: [{ src: "node_modules/**/*.wasm", dest: "node_modules/.vite/dist" }],
-	copySync: true,
-	hook: "buildStart",
-});
-
 export default defineConfig({
 	plugins: [
-		//reactRefresh(),
 		react(),
 		nodePolyfills(),
 		MockModulePlugin(),
-		//Polyfills for Node.js globals and modules for Vite/Rollup
-		//copied,
 		wasmContentTypePlugin,
 	],
 	resolve: {
