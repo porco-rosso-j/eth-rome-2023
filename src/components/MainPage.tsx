@@ -23,7 +23,7 @@ import {
 import { useContext, useState, useEffect } from "react";
 import getRailgunWallet from "src/utils/getRailgunWallet";
 import UserCredentialContext from "src/context/userCredential";
-import { privateTransfer } from "src/scripts/private-transfer";
+import { privateTransfer, seeAr } from "src/scripts/private-transfer";
 import { privateClaim } from "src/scripts/claim";
 import { privateClaimSwap } from "src/scripts/claim-swap";
 import { TOKEN_ADDRESSES } from "src/constants";
@@ -72,6 +72,13 @@ const MainPage = () => {
 		railgunWalletMnemonic,
 		saveRailgunWalletID,
 	} = useContext(UserCredentialContext);
+
+	const [artifactDownloaded, setArtifactDownloaded] = useState(false);
+	console.log("artifactDownloaded: ", artifactDownloaded);
+
+	useEffect(() => {
+		seeAr();
+	}, []);
 
 	useEffect(() => {
 		const timeOutId = setTimeout(async () => {

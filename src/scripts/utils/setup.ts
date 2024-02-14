@@ -1,6 +1,6 @@
 import LevelDOWN from "leveldown";
 import LevelDB from "level-js";
-import { createArtifactStore } from "./artifactStore";
+import { CustomArtifactStore, createArtifactStore } from "./artifactStore";
 import {
 	startRailgunEngine,
 	loadProvider,
@@ -27,7 +27,6 @@ const dbPath = "engine.db";
 const db = new LevelDB(dbPath);
 let currentMerkletreeScanStatus: Optional<MerkletreeScanStatus>;
 
-/// -------------------- ///
 export const MOCK_BALANCES_UPDATE_CALLBACK: BalancesUpdatedCallback = () => {
 	// noop
 };
@@ -48,24 +47,26 @@ const setLogging = () => {
 export const initEngine = async () => {
 	// const shouldDebug = false;
 	const MOCK_LIST: POIList = {
-		key: "mock key",
+		key: "efc6ddb59c098a13fb2b618fdae94c1c3a807abc8fb1837c93620c9143ee9e88",
 		type: POIListType.Gather,
 		name: "mock list",
 		description: "mock",
 	};
 
-	// await startEngine();
+	const artifactStore = new CustomArtifactStore();
+	console.log("artifactStore: ", artifactStore);
+
+	// await startEngine();http://localhost:5173/
 	await startRailgunEngine(
 		"test", // walletSource
 		db,
 		true, //shouldDebug
-		// artifactStore,
-		createArtifactStore("local/dir"),
-		//createArtifactStore(),
+		artifactStore,
 		false, // UseNativeArtifacts
 		false,
 		["https://poi-node.terminal-wallet.com"],
 		[MOCK_LIST],
+		// [],
 		true
 	);
 	setLogging();
@@ -73,21 +74,6 @@ export const initEngine = async () => {
 	setOnBalanceUpdateCallback(MOCK_BALANCES_UPDATE_CALLBACK);
 	setOnUTXOMerkletreeScanCallback(merkletreeHistoryScanCallback);
 };
-
-// export const startEngine = async () => {
-// 	// const shouldDebug = false;
-// 	startRailgunEngine(
-// 		"test", // walletSource
-// 		db,
-// 		true, //shouldDebug
-// 		// artifactStore,
-// 		createArtifactStore("local/dir"),
-// 		false, // UseNativeArtifacts
-// 		false,
-// 		["https://poi-node.terminal-wallet.com"],
-// 		undefined
-// 	);
-// };
 
 export const initEngineNetwork = async () => {
 	// Don't wait for async. It will try to load historical events, which takes a while.

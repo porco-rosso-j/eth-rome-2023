@@ -5,7 +5,9 @@ import {
 	Chain,
 	poll,
 	TXIDVersion,
+	PreTransactionPOIsPerTxidLeafPerList,
 } from "@railgun-community/shared-models";
+import { POI } from "@railgun-community/engine";
 import {
 	RelayerConnectionStatusCallback,
 	RelayerOptions,
@@ -17,6 +19,7 @@ import {
 // 	RelayerOptions,
 // } from "@railgun-community/waku-relayer-client-web";
 import { Optional } from "./type";
+import { ContractTransaction } from "ethers";
 
 // import { Wallet, providers } from "ethers5";
 // const ALCHEMY_GOERLI = process.env.REACT_APP_ALCHEMY_GOERLI;
@@ -74,7 +77,6 @@ const relayerOptions: RelayerOptions = {
 export async function getRelayer(tokenAddress: string) {
 	console.log("1");
 	console.log("tokenAddress: ", tokenAddress);
-	//tokenAddress = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
 
 	let currentChain: Chain;
 	let currentStatus: RelayerConnectionStatus;
@@ -84,7 +86,6 @@ export async function getRelayer(tokenAddress: string) {
 	};
 
 	await WakuRelayerClient.start(
-		// Ethereum,
 		Goerli,
 		relayerOptions,
 		statusCallback,
@@ -95,16 +96,8 @@ export async function getRelayer(tokenAddress: string) {
 	console.log("started: ", WakuRelayerClient.isStarted());
 	console.log("started: ", WakuRelayerClient.getContentTopics());
 
-	// WakuRelayerClient.setAddressFilters([gpRelayerAddr], []);
-
 	console.log("currentChain: ", currentChain!);
 	console.log("currentStatus: ", currentStatus!);
-
-	// await WakuRelayerClient.setChain(Goerli);
-	// console.log(
-	// 	"await WakuRelayerClient.tryReconnect();: ",
-	// 	await WakuRelayerClient.tryReconnect()
-	// );
 
 	// Poll until currentStatus is Connected.
 	const statusInitialConnection = await poll(
@@ -134,24 +127,17 @@ export async function getRelayer(tokenAddress: string) {
 }
 
 export async function sendTxRailgunRelayer(
-	tx: any,
-	selectedRelayer?: SelectedRelayer
+	tx: ContractTransaction,
+	selectedRelayer?: SelectedRelayer,
+	preTransactionPOIsPerTxidLeafPerList?: PreTransactionPOIsPerTxidLeafPerList
 ): Promise<string> {
 	const nullifeirs: string[] = ["0x012345"];
 
-	// let currentChain: Chain;
-	// let currentStatus: RelayerConnectionStatus;
-	// const statusCallback = (chain: Chain, status: RelayerConnectionStatus) => {
-	// 	currentChain = chain;
-	// 	currentStatus = status;
-	// };
-
-	// await WakuRelayerClient.start(
-	// 	Goerli,
-	// 	relayerOptions,
-	// 	statusCallback,
-	// 	relayerDebugger
-	// );
+	console.log("tx: ", tx);
+	console.log(
+		"preTransactionPOIsPerTxidLeafPerList: ",
+		preTransactionPOIsPerTxidLeafPerList
+	);
 
 	// Create Relayed transaction and send through selected Relayer.
 	const relayerTransaction: RelayerTransaction =
@@ -161,13 +147,13 @@ export async function sendTxRailgunRelayer(
 			tx.data,
 			selectedRelayer?.railgunAddress as string,
 			selectedRelayer?.tokenFee.feesID as string,
-			// gpRelayerAddr,
-			// gpRelayerFeesID,
 			Goerli,
 			nullifeirs,
-			BigInt("0x10000"),
+			tx.gasPrice as bigint,
 			true,
-			{}
+			preTransactionPOIsPerTxidLeafPerList
+				? preTransactionPOIsPerTxidLeafPerList
+				: {}
 		);
 
 	console.log("6");

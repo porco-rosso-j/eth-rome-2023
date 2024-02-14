@@ -16,7 +16,7 @@ const originalGasDetails: TransactionGasDetails = {
 	// evmGasType: EVMGasType.Type2, // Depends on the chain (BNB uses type 0)
 	evmGasType: EVMGasType.Type1, // Depends on the chain (BNB uses type 0)
 	gasEstimate: 0n, // Always 0, we don't have this yet.
-	gasPrice: 10000000n,
+	gasPrice: 530000000n,
 	//maxFeePerGas: BigInt("0x100000"), // Current gas Max Fee
 	//maxPriorityFeePerGas: BigInt("0x010000"), // Current gas Max Priority Fee
 };
@@ -28,13 +28,15 @@ const feeTokenDetailsWETH: FeeTokenDetails = {
 };
 
 export async function setRailgunGas() {
-	const shieldUnshieldfee = 25n; // must be 25n
+	const shieldUnshieldfee = 125n; // must be 25n
 	setRailgunFees(
 		NetworkName.EthereumGoerli,
 		shieldUnshieldfee,
 		shieldUnshieldfee
 	);
 }
+
+const minGasLimit = BigInt(1_500_000);
 
 export async function getGasDetailsERC20(
 	railgunWalletID: string,
@@ -57,7 +59,7 @@ export async function getGasDetailsERC20(
 		feeTokenDetailsWETH,
 		// true,
 		false,
-		undefined
+		minGasLimit
 	);
 
 	console.log("gasEstimate: ", gasEstimate);
@@ -66,8 +68,7 @@ export async function getGasDetailsERC20(
 	const gasDetails: TransactionGasDetails = {
 		evmGasType: EVMGasType.Type1, // Depends on the chain (BNB uses type 0)
 		gasEstimate: gasEstimate, // Output from gasEstimateForDeposit
-		//gasEstimate: 1500000n, // Output from gasEstimateForDeposit
-		gasPrice: BigInt("0x100000"),
+		gasPrice: 530000000n,
 	};
 
 	// // for EOA relayer

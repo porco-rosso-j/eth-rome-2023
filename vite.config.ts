@@ -1,9 +1,7 @@
 import { defineConfig, Plugin } from "vite";
 import path from "path";
 import react from "@vitejs/plugin-react-swc";
-//import reactRefresh from "@vitejs/plugin-react-refresh"; // Assuming a React project; adjust accordingly.
 import { nodePolyfills } from "vite-plugin-node-polyfills";
-// Polyfill for Node.js built-ins and globals;
 import fs from "fs";
 
 function MockModulePlugin(): Plugin {
@@ -56,25 +54,10 @@ export default defineConfig({
 	},
 	optimizeDeps: {
 		esbuildOptions: {
-			// Node.js global to browser globalThis polyfill
-			define: {
-				global: "globalThis",
-			},
 			target: "esnext",
 		},
 	},
 	build: {
-		// assetsInclude: ["**/*.wasm"], // Include WASM files as assets
-		// If snarkjs.min.js is large, you might increase the limit like so:
-		rollupOptions: {
-			output: {
-				chunkFileNames: "scripts/[name]-[hash].js",
-				manualChunks(id) {
-					if (id.includes("snarkjs.min.js")) {
-						return "snarkjs"; // This will keep snarkjs.min.js separate from other chunks
-					}
-				},
-			},
-		},
+		target: "esnext",
 	},
 });

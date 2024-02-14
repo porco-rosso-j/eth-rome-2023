@@ -7,9 +7,9 @@ export const MOCK_FALLBACK_PROVIDER_JSON_CONFIG_GOERLI: FallbackProviderJsonConf
 		chainId: 5,
 		providers: [
 			{
-				// provider: "https://ethereum-goerli.publicnode.com",
-				provider:
-					"https://eth-goerli.g.alchemy.com/v2/L8eKUNVmlKk7r9nSMmZIP-MUfgTktQc3",
+				provider: "https://ethereum-goerli.publicnode.com",
+				//provider:
+				//	"https://eth-goerli.g.alchemy.com/v2/L8eKUNVmlKk7r9nSMmZIP-MUfgTktQc3",
 				priority: 1,
 				weight: 2,
 				maxLogsPerBatch: 10,
